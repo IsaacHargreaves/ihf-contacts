@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IH Film — Contacts</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMjAuOSAyMjEiPgogIDxyZWN0IHdpZHRoPSIyMjAuOSIgaGVpZ2h0PSIyMjEiIGZpbGw9IiMwZDBkMGQiLz4KICA8cGF0aCBkPSJNMTQ2LjMsMkgxLjZ2NzMuMlYxNDZ2NzMuMmgxNDQuN2g3Mi41VjJIMTQ2LjN6IE00LjIsNC42aDE0Mi4ydjcwLjZINC4yVjQuNnogTTQuMiwyMTYuN3YtNzAuNmgxNDIuMnY3MC42TDQuMiwyMTYuN0w0LjIsMjE2Ljd6IE0yMTYuMywyMTYuN0gxNDl2LTczLjJINC4yVjc3LjloMTQ0LjdWNC42aDY3LjN2MjEyLjFIMjE2LjN6IiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
@@ -710,7 +711,11 @@ function getFiltered(){
   let list=contacts.filter(c=>{
     if(showFavOnly&&!c.favourite) return false;
     if(impFilter!=='all'&&c.importance!==impFilter) return false;
-    if(q){ const hay=[c.first,c.last,c.company,c.title,...(c.tags||[])].join(' ').toLowerCase(); if(!hay.includes(q)) return false; }
+    if(q){
+      const hay=[c.first,c.last,c.company,c.title,c.source,c.notes,c.nextaction,...(c.tags||[])].filter(Boolean).join(' ').toLowerCase();
+      const words=q.trim().split(/\s+/);
+      if(!words.every(w=>hay.includes(w))) return false;
+    }
     return true;
   });
   const io={High:0,Medium:1,Low:2};
@@ -826,6 +831,9 @@ function clearContactForm(){
   currentTags=[]; renderTagPills();
 }
 function saveContact(){
+  // Flush any tag that's been typed but not yet confirmed with Enter/+
+  const pendingTag=document.getElementById('f-tag-input').value.trim();
+  if(pendingTag && !currentTags.includes(pendingTag)){ currentTags.push(pendingTag); document.getElementById('f-tag-input').value=''; renderTagPills(); }
   const first=document.getElementById('f-first').value.trim();
   if(!first){ alert('First name is required'); return; }
   const data={
