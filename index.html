@@ -23,14 +23,18 @@ body{font-family:var(--font);background:var(--black);color:var(--white);min-heig
 #lock .logo-wrap svg{width:52px;height:52px}
 #lock .brand{font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:var(--light)}
 #lock .brand strong{display:block;font-size:20px;font-weight:700;color:var(--white);letter-spacing:0.15em;margin-bottom:2px}
-#lock .lock-form{display:flex;flex-direction:column;gap:12px;width:280px}
+#lock .lock-form{display:flex;flex-direction:column;gap:12px;width:300px}
 #lock .lock-form input{background:var(--dark2);border:1px solid var(--border-light);color:var(--white);font-family:var(--font);font-size:14px;padding:10px 14px;border-radius:4px;outline:none;transition:border-color .2s}
 #lock .lock-form input:focus{border-color:var(--red)}
 #lock .lock-form input::placeholder{color:var(--mid)}
 #lock .lock-btn{background:var(--red);color:var(--white);border:none;font-family:var(--font);font-size:13px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:11px;border-radius:4px;cursor:pointer;transition:background .2s}
 #lock .lock-btn:hover{background:var(--red-hover)}
+#lock .lock-btn.secondary{background:none;border:1px solid var(--border-light);color:var(--mid)}
+#lock .lock-btn.secondary:hover{border-color:var(--white);color:var(--white);background:none}
 #lock .lock-error{color:#e06050;font-size:12px;text-align:center;min-height:16px}
 #lock .lock-hint{color:var(--mid);font-size:11px;text-align:center}
+#lock .lock-divider{display:flex;align-items:center;gap:10px;color:var(--border-light);font-size:11px}
+#lock .lock-divider::before,#lock .lock-divider::after{content:'';flex:1;height:1px;background:var(--border)}
 
 /* APP SHELL */
 #app{display:none;flex-direction:column;min-height:100vh}
@@ -39,7 +43,11 @@ header{background:var(--dark1);border-bottom:1px solid var(--border);padding:0 1
 .header-left svg{width:32px;height:32px}
 .header-brand{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--light)}
 .header-brand strong{display:block;font-size:15px;font-weight:700;color:var(--white);letter-spacing:0.12em;line-height:1.2}
-.header-right{display:flex;align-items:center;gap:8px}
+.header-right{display:flex;align-items:center;gap:10px}
+.sync-status{font-size:11px;letter-spacing:0.05em;color:var(--mid)}
+.sync-status.ok{color:#7db87d}
+.sync-status.err{color:#e05040}
+.sync-status.syncing{color:var(--gold)}
 .btn-lock{background:none;border:1px solid var(--border-light);color:var(--mid);font-family:var(--font);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 12px;border-radius:3px;cursor:pointer;transition:all .2s}
 .btn-lock:hover{border-color:var(--red);color:var(--red)}
 
@@ -103,7 +111,6 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .ds-value{font-size:14px;color:var(--white)}
 .ds-value a{color:var(--gold);text-decoration:none}
 .ds-value a:hover{text-decoration:underline}
-.ds-value.muted{color:var(--mid);font-size:13px}
 .tags-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
 .tag{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--dark3);color:var(--off-white)}
 .tag-high{background:#2a0a05;color:#e05040}
@@ -125,13 +132,13 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .tag-input-row input{flex:1;background:var(--dark2);border:1px solid var(--border-light);color:var(--white);font-family:var(--font);font-size:13px;padding:7px 10px;border-radius:3px;outline:none;transition:border-color .2s}
 .tag-input-row input:focus{border-color:var(--red)}
 .tag-input-row input::placeholder{color:var(--mid)}
-.tag-add-btn{background:none;border:1px solid var(--border-light);color:var(--light);font-family:var(--font);font-size:18px;width:32px;height:32px;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;line-height:1}
+.tag-add-btn{background:none;border:1px solid var(--border-light);color:var(--light);font-family:var(--font);font-size:18px;width:32px;height:32px;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
 .tag-add-btn:hover{border-color:var(--white);color:var(--white)}
 .tag-pills{display:flex;flex-wrap:wrap;gap:6px;min-height:28px}
 .tag-pill{display:flex;align-items:center;gap:5px;background:var(--dark3);border:1px solid var(--border-light);color:var(--off-white);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px}
-.tag-pill button{background:none;border:none;color:var(--mid);cursor:pointer;font-size:13px;line-height:1;padding:0;display:flex;align-items:center;transition:color .15s}
+.tag-pill button{background:none;border:none;color:var(--mid);cursor:pointer;font-size:13px;line-height:1;padding:0;transition:color .15s}
 .tag-pill button:hover{color:var(--red)}
-.tag-hint{font-size:11px;color:var(--mid);letter-spacing:0.03em}
+.tag-hint{font-size:11px;color:var(--mid)}
 
 /* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;align-items:center;justify-content:center}
@@ -185,7 +192,10 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .settings-msg{font-size:12px;min-height:16px}
 .settings-msg.ok{color:#7db87d}
 .settings-msg.err{color:#e05040}
-.settings-btns{display:flex;gap:8px;flex-wrap:wrap}
+.settings-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.drive-badge{display:flex;align-items:center;gap:8px;background:var(--dark2);border:1px solid var(--border-light);border-radius:4px;padding:10px 14px;font-size:12px;color:var(--light)}
+.drive-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--mid);flex-shrink:0}
+.drive-badge .dot.connected{background:#7db87d}
 
 @media(max-width:700px){
   .detail-body{grid-template-columns:1fr}
@@ -209,8 +219,10 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
   <div class="lock-form">
     <input type="password" id="pass-input" placeholder="Enter password" autocomplete="current-password"/>
     <button class="lock-btn" onclick="unlock()">Unlock</button>
+    <div class="lock-divider">or</div>
+    <button class="lock-btn secondary" onclick="signInWithGoogle()">Sign in with Google Drive</button>
     <div class="lock-error" id="lock-error"></div>
-    <div class="lock-hint">Default password: ihfilm2024</div>
+    <div class="lock-hint">Password unlock uses local storage · Google sign-in syncs to Drive</div>
   </div>
 </div>
 
@@ -226,7 +238,7 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
       </div>
     </div>
     <div class="header-right">
-      <span id="sync-indicator" style="font-size:11px;color:var(--mid);letter-spacing:0.05em"></span>
+      <span class="sync-status" id="sync-status"></span>
       <button class="btn-lock" onclick="lockApp()">Lock</button>
     </div>
   </header>
@@ -306,8 +318,21 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
     <div class="settings-page">
 
       <div class="settings-card">
+        <div class="settings-title">Google Drive Sync</div>
+        <p class="settings-desc">When signed in with Google, all data saves automatically to a file called <strong style="color:var(--white)">ihfilm-contacts.json</strong> in your Google Drive. It's private — only this app can see it.</p>
+        <div class="drive-badge" id="drive-badge">
+          <span class="dot" id="drive-dot"></span>
+          <span id="drive-status-text">Not connected</span>
+        </div>
+        <div class="settings-btns">
+          <button class="btn-save" id="drive-connect-btn" onclick="signInWithGoogle()">Connect Google Drive</button>
+          <button class="btn-cancel" id="drive-disconnect-btn" onclick="disconnectDrive()" style="display:none">Disconnect</button>
+        </div>
+      </div>
+
+      <div class="settings-card">
         <div class="settings-title">Change Password</div>
-        <p class="settings-desc">Your password locks the app when you click Lock. It's stored locally in this browser.</p>
+        <p class="settings-desc">Your local password locks the app when you click Lock. Used when not signed in via Google.</p>
         <div class="settings-row">
           <div class="form-group"><label>Current Password</label><input type="password" id="s-current" placeholder="Current password" autocomplete="current-password"/></div>
           <div class="form-group"><label>New Password</label><input type="password" id="s-new" placeholder="New password (min. 4 characters)" autocomplete="new-password"/></div>
@@ -319,7 +344,7 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 
       <div class="settings-card">
         <div class="settings-title">Export Data</div>
-        <p class="settings-desc">Download your data as a backup. The JSON file contains everything and can be re-imported. The CSV is useful for opening in Excel or sharing.</p>
+        <p class="settings-desc">Download a local backup. JSON can be re-imported; CSV opens in Excel or Sheets.</p>
         <div class="settings-btns">
           <button class="btn-save" onclick="exportJSON()">Export full backup (.json)</button>
           <button class="btn-cancel" onclick="exportCSV()">Export contacts (.csv)</button>
@@ -328,7 +353,7 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 
       <div class="settings-card">
         <div class="settings-title">Import Data</div>
-        <p class="settings-desc">Restore from a previously exported JSON backup. New contacts are merged in — existing ones are not overwritten.</p>
+        <p class="settings-desc">Restore from a previously exported JSON backup. New entries are merged in — existing ones are not overwritten.</p>
         <div class="settings-btns">
           <label class="btn-cancel" style="cursor:pointer">
             Choose backup file (.json)
@@ -340,7 +365,7 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 
       <div class="settings-card danger">
         <div class="settings-title red">Danger Zone</div>
-        <p class="settings-desc">Permanently delete all contacts and prospects. This cannot be undone — export a backup first.</p>
+        <p class="settings-desc">Permanently delete all contacts and prospects from local storage. If connected to Drive, the Drive file is also overwritten with empty data. Export a backup first.</p>
         <div><button class="btn-cancel" style="color:#e05040;border-color:#e05040" onclick="clearAllData()">Delete all data</button></div>
       </div>
 
@@ -348,9 +373,9 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
         <div class="settings-title">About</div>
         <p class="settings-desc" style="line-height:1.9">
           <strong style="color:var(--white)">Isaac Hargreaves Film — Contacts</strong><br>
-          Private professional network manager. All data is saved in this browser's local storage.<br><br>
-          To use on another device: export a JSON backup, open this file in the other browser, and import it.<br><br>
-          To keep data safe long-term: export a backup regularly and store it in Google Drive or similar.
+          Private professional network manager.<br>
+          Sign in with Google to sync data to your Drive across all devices.<br>
+          Without Google sign-in, data is saved locally in this browser only.
         </p>
       </div>
 
@@ -358,7 +383,7 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
   </div>
 </div>
 
-<!-- ADD / EDIT CONTACT MODAL -->
+<!-- CONTACT MODAL -->
 <div class="modal-overlay" id="contact-modal">
   <div class="modal">
     <div class="modal-title" id="modal-title">New Contact</div>
@@ -381,14 +406,14 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
       </div>
       <div class="form-divider">Role Tags</div>
       <div class="form-group" style="grid-column:1/-1">
-        <label>Type a role and press Enter or + to add it</label>
+        <label>Type a role and press Enter or + to add</label>
         <div class="tag-input-wrap">
           <div class="tag-input-row">
-            <input id="f-tag-input" placeholder="e.g. Supplier, Director, Broadcaster…" onkeydown="handleTagKey(event,'f')"/>
-            <button class="tag-add-btn" onclick="addTag('f')" title="Add tag">+</button>
+            <input id="f-tag-input" placeholder="e.g. Supplier, Director, Broadcaster…" onkeydown="handleTagKey(event)"/>
+            <button class="tag-add-btn" onclick="addTag()" title="Add tag">+</button>
           </div>
           <div class="tag-pills" id="f-tag-pills"></div>
-          <span class="tag-hint">Press Enter or + to add each tag. Click × to remove.</span>
+          <span class="tag-hint">Press Enter or + to add · Click × to remove</span>
         </div>
       </div>
       <div class="form-divider">Notes</div>
@@ -432,8 +457,7 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
       </div>
       <div class="form-group"><label>Source</label><input id="p-source" placeholder="How you found them"/></div>
       <div class="form-divider">Status</div>
-      <div class="form-group" style="grid-column:1/-1">
-        <label>Status</label>
+      <div class="form-group" style="grid-column:1/-1"><label>Status</label>
         <select id="p-status">
           <option value="Active">Active</option>
           <option value="Dormant">Dormant</option>
@@ -452,88 +476,241 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
   </div>
 </div>
 
-<script>
-const PASS_KEY='ihfilm_pass', CONTACTS_KEY='ihfilm_contacts', PROSPECTS_KEY='ihfilm_prospects', AUTH_KEY='ihfilm_auth';
-let contacts=[], prospects=[], selectedId=null, editingId=null, editingProspectId=null;
-let impFilter='all', showFavOnly=false;
-let currentTags=[];
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async></script>
 
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+const CLIENT_ID = '350182680003-jgih0ge5pnlu7r9a1tk11sltb1klme78.apps.googleusercontent.com';
+const SCOPES = 'https://www.googleapis.com/auth/drive.appdata';
+const DRIVE_FILE = 'ihfilm-contacts.json';
+const PASS_KEY = 'ihfilm_pass';
+const AUTH_KEY = 'ihfilm_auth';
+const DRIVE_TOKEN_KEY = 'ihfilm_drive_token';
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let contacts = [], prospects = [], selectedId = null, editingId = null, editingProspectId = null;
+let impFilter = 'all', showFavOnly = false, currentTags = [];
+let driveToken = null, driveFileId = null, saveTimer = null;
+
+// ─── UTILS ────────────────────────────────────────────────────────────────────
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function getPass(){ return localStorage.getItem(PASS_KEY)||'ihfilm2024'; }
 function setPass(p){ localStorage.setItem(PASS_KEY,p); }
-function loadData(){
-  try{ contacts=JSON.parse(localStorage.getItem(CONTACTS_KEY)||'[]'); }catch(e){ contacts=[]; }
-  try{ prospects=JSON.parse(localStorage.getItem(PROSPECTS_KEY)||'[]'); }catch(e){ prospects=[]; }
-}
-function saveData(){ localStorage.setItem(CONTACTS_KEY,JSON.stringify(contacts)); }
-function saveProspectsData(){ localStorage.setItem(PROSPECTS_KEY,JSON.stringify(prospects)); }
-
-function initials(c){ return ((c.first||'').charAt(0)+(c.last||'').charAt(0)).toUpperCase()||'?'; }
 const AC=['#8b3a3a','#3a6e8b','#3a7a4a','#7a5a3a','#5a3a7a','#3a5a7a','#7a3a5a'];
-function avatarColor(id){ let n=0; for(let i=0;i<(id||'').length;i++)n+=id.charCodeAt(i); return AC[n%AC.length]; }
+function avatarColor(id){ let n=0; for(let i=0;i<(id||'').length;i++) n+=id.charCodeAt(i); return AC[n%AC.length]; }
+function initials(c){ return ((c.first||'').charAt(0)+(c.last||'').charAt(0)).toUpperCase()||'?'; }
+function setSyncStatus(msg, cls=''){
+  const el = document.getElementById('sync-status');
+  el.textContent = msg; el.className = 'sync-status'+(cls?' '+cls:'');
+}
 
-/* AUTH */
+// ─── LOCAL STORAGE ────────────────────────────────────────────────────────────
+function loadLocal(){
+  try{ contacts = JSON.parse(localStorage.getItem('ihfilm_contacts')||'[]'); }catch(e){ contacts=[]; }
+  try{ prospects = JSON.parse(localStorage.getItem('ihfilm_prospects')||'[]'); }catch(e){ prospects=[]; }
+}
+function saveLocal(){
+  localStorage.setItem('ihfilm_contacts', JSON.stringify(contacts));
+  localStorage.setItem('ihfilm_prospects', JSON.stringify(prospects));
+}
+
+// ─── GOOGLE DRIVE ─────────────────────────────────────────────────────────────
+function signInWithGoogle(){
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID,
+    scope: SCOPES,
+    callback: async (resp) => {
+      if(resp.error){ setError('Google sign-in failed: '+resp.error); return; }
+      driveToken = resp.access_token;
+      localStorage.setItem(DRIVE_TOKEN_KEY, driveToken);
+      localStorage.setItem(AUTH_KEY, 'google');
+      document.getElementById('lock').style.display='none';
+      document.getElementById('app').style.display='flex';
+      updateDriveBadge(true);
+      setSyncStatus('Connecting to Drive…','syncing');
+      await loadFromDrive();
+      renderList(); renderProspects();
+    }
+  });
+  client.requestAccessToken();
+}
+
+async function driveRequest(method, url, body, extraHeaders={}){
+  const resp = await fetch(url, {
+    method,
+    headers: { 'Authorization': 'Bearer '+driveToken, ...extraHeaders },
+    body: body || undefined
+  });
+  if(resp.status===401){ driveToken=null; updateDriveBadge(false); setSyncStatus('Drive session expired — reconnect in Settings','err'); return null; }
+  return resp;
+}
+
+async function findDriveFile(){
+  const resp = await driveRequest('GET',
+    'https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=name%3D%22'+DRIVE_FILE+'%22&fields=files(id,name)');
+  if(!resp) return null;
+  const data = await resp.json();
+  return data.files && data.files.length ? data.files[0].id : null;
+}
+
+async function loadFromDrive(){
+  try{
+    setSyncStatus('Loading from Drive…','syncing');
+    driveFileId = await findDriveFile();
+    if(!driveFileId){ setSyncStatus('New file — ready to save','ok'); return; }
+    const resp = await driveRequest('GET',
+      'https://www.googleapis.com/drive/v3/files/'+driveFileId+'?alt=media');
+    if(!resp){ return; }
+    const data = await resp.json();
+    if(Array.isArray(data.contacts)) contacts = data.contacts;
+    if(Array.isArray(data.prospects)) prospects = data.prospects;
+    saveLocal();
+    setSyncStatus('Synced from Drive','ok');
+    setTimeout(()=>setSyncStatus('Drive connected','ok'), 2000);
+  }catch(e){
+    setSyncStatus('Drive load error','err');
+  }
+}
+
+async function saveToDrive(){
+  if(!driveToken){ saveLocal(); return; }
+  setSyncStatus('Saving…','syncing');
+  const payload = JSON.stringify({ contacts, prospects, savedAt: new Date().toISOString() });
+  try{
+    if(!driveFileId){
+      // Create new file
+      const meta = JSON.stringify({ name: DRIVE_FILE, parents: ['appDataFolder'] });
+      const form = new FormData();
+      form.append('metadata', new Blob([meta],{type:'application/json'}));
+      form.append('file', new Blob([payload],{type:'application/json'}));
+      const resp = await driveRequest('POST',
+        'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',
+        form);
+      if(!resp) return;
+      const d = await resp.json();
+      driveFileId = d.id;
+    } else {
+      // Update existing file
+      await driveRequest('PATCH',
+        'https://www.googleapis.com/upload/drive/v3/files/'+driveFileId+'?uploadType=media',
+        payload, {'Content-Type':'application/json'});
+    }
+    saveLocal();
+    setSyncStatus('Saved to Drive ✓','ok');
+    setTimeout(()=>setSyncStatus('Drive connected','ok'), 2000);
+  }catch(e){
+    saveLocal();
+    setSyncStatus('Drive save failed — saved locally','err');
+  }
+}
+
+function scheduleSave(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveToDrive, 800);
+}
+
+function updateDriveBadge(connected){
+  const dot = document.getElementById('drive-dot');
+  const text = document.getElementById('drive-status-text');
+  const connectBtn = document.getElementById('drive-connect-btn');
+  const disconnectBtn = document.getElementById('drive-disconnect-btn');
+  if(!dot) return;
+  if(connected){
+    dot.className='dot connected';
+    text.textContent='Connected — data syncs automatically to Google Drive';
+    connectBtn.style.display='none';
+    disconnectBtn.style.display='';
+  } else {
+    dot.className='dot';
+    text.textContent='Not connected — data stored locally only';
+    connectBtn.style.display='';
+    disconnectBtn.style.display='none';
+  }
+}
+
+function disconnectDrive(){
+  if(!confirm('Disconnect Google Drive? Data will continue to be stored locally.')) return;
+  driveToken=null; driveFileId=null;
+  localStorage.removeItem(DRIVE_TOKEN_KEY);
+  localStorage.setItem(AUTH_KEY,'1');
+  updateDriveBadge(false);
+  setSyncStatus('');
+}
+
+function setError(msg){ document.getElementById('lock-error').textContent=msg; }
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
 function unlock(){
-  const v=document.getElementById('pass-input').value;
-  const err=document.getElementById('lock-error');
+  const v = document.getElementById('pass-input').value;
   if(v===getPass()){
     localStorage.setItem(AUTH_KEY,'1');
     document.getElementById('lock').style.display='none';
     document.getElementById('app').style.display='flex';
-    loadData(); renderList(); renderProspects();
-  } else if(!v){ err.textContent='Enter your password';
-  } else { err.textContent='Incorrect password'; document.getElementById('pass-input').value=''; }
+    loadLocal(); renderList(); renderProspects();
+    setSyncStatus('Local storage','');
+  } else if(!v){ setError('Enter your password');
+  } else { setError('Incorrect password'); document.getElementById('pass-input').value=''; }
 }
 document.getElementById('pass-input').addEventListener('keydown',e=>{ if(e.key==='Enter') unlock(); });
 
 function lockApp(){
+  if(driveToken) google.accounts.oauth2.revoke(driveToken, ()=>{});
+  driveToken=null; driveFileId=null;
   localStorage.removeItem(AUTH_KEY);
   document.getElementById('app').style.display='none';
   document.getElementById('lock').style.display='flex';
   document.getElementById('pass-input').value='';
-  document.getElementById('lock-error').textContent='';
+  setError('');
 }
-window.addEventListener('load',()=>{
-  loadData();
-  if(localStorage.getItem(AUTH_KEY)==='1'){
+
+window.addEventListener('load', async ()=>{
+  loadLocal();
+  const authMode = localStorage.getItem(AUTH_KEY);
+  const storedToken = localStorage.getItem(DRIVE_TOKEN_KEY);
+  if(authMode==='google' && storedToken){
+    driveToken = storedToken;
+    document.getElementById('lock').style.display='none';
+    document.getElementById('app').style.display='flex';
+    updateDriveBadge(true);
+    setSyncStatus('Reconnecting to Drive…','syncing');
+    await loadFromDrive();
+    renderList(); renderProspects();
+  } else if(authMode==='1'){
     document.getElementById('lock').style.display='none';
     document.getElementById('app').style.display='flex';
     renderList(); renderProspects();
   }
 });
 
-/* TABS */
+// ─── TABS ─────────────────────────────────────────────────────────────────────
 function switchTab(tab,btn){
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('tab-contacts').style.display=tab==='contacts'?'flex':'none';
   document.getElementById('tab-prospects').style.display=tab==='prospects'?'flex':'none';
   document.getElementById('tab-settings').style.display=tab==='settings'?'flex':'none';
+  if(tab==='settings') updateDriveBadge(!!driveToken);
 }
 
-/* FILTERS */
+// ─── FILTERS ──────────────────────────────────────────────────────────────────
 function setFilter(val,el){
   impFilter=val;
   document.querySelectorAll('#filter-imp .filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  renderList();
+  el.classList.add('active'); renderList();
 }
 function toggleFavFilter(el){
-  showFavOnly=!showFavOnly;
-  el.classList.toggle('active',showFavOnly);
-  renderList();
+  showFavOnly=!showFavOnly; el.classList.toggle('active',showFavOnly); renderList();
 }
 
-/* CONTACT LIST */
+// ─── CONTACT LIST ─────────────────────────────────────────────────────────────
 function getFiltered(){
   const q=document.getElementById('search-input').value.toLowerCase();
   const sort=document.getElementById('sort-select').value;
   let list=contacts.filter(c=>{
     if(showFavOnly&&!c.favourite) return false;
     if(impFilter!=='all'&&c.importance!==impFilter) return false;
-    if(q){
-      const hay=[c.first,c.last,c.company,c.title,...(c.tags||[])].join(' ').toLowerCase();
-      if(!hay.includes(q)) return false;
-    }
+    if(q){ const hay=[c.first,c.last,c.company,c.title,...(c.tags||[])].join(' ').toLowerCase(); if(!hay.includes(q)) return false; }
     return true;
   });
   const io={High:0,Medium:1,Low:2};
@@ -544,7 +721,6 @@ function getFiltered(){
   else if(sort==='fav') list.sort((a,b)=>(b.favourite?1:0)-(a.favourite?1:0));
   return list;
 }
-
 function renderList(){
   const list=getFiltered();
   const el=document.getElementById('contact-list');
@@ -554,14 +730,12 @@ function renderList(){
     <div class="contact-item${selectedId===c.id?' selected':''}" onclick="selectContact('${c.id}')">
       <div class="avatar" style="background:${avatarColor(c.id)}">${initials(c)}</div>
       <div class="ci-info">
-        <div class="ci-name">${esc(c.first||'')} ${esc(c.last||'')}</div>
+        <div class="ci-name">${esc(c.first)} ${esc(c.last)}</div>
         <div class="ci-role">${esc(c.company||c.title||'—')}</div>
       </div>
       ${c.favourite?'<span class="ci-star">★</span>':''}
     </div>`).join('');
 }
-
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 function impClass(v){ return v==='High'?'tag-high':v==='Medium'?'tag-med':'tag-low'; }
 
@@ -574,7 +748,7 @@ function selectContact(id){
         <div class="detail-avatar-area">
           <div class="detail-avatar" style="background:${avatarColor(c.id)}">${initials(c)}</div>
           <div>
-            <div class="detail-name">${esc(c.first||'')} ${esc(c.last||'')}</div>
+            <div class="detail-name">${esc(c.first)} ${esc(c.last)}</div>
             <div class="detail-company">${esc([c.title,c.company].filter(Boolean).join(' · ')||'—')}</div>
           </div>
         </div>
@@ -585,33 +759,14 @@ function selectContact(id){
         </div>
       </div>
       <div class="detail-body">
-        <div class="detail-section">
-          <span class="ds-label">Email</span>
-          <div class="ds-value">${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:'<span class="muted">—</span>'}</div>
-        </div>
-        <div class="detail-section">
-          <span class="ds-label">Phone</span>
-          <div class="ds-value">${c.phone?`<a href="tel:${esc(c.phone)}">${esc(c.phone)}</a>`:'<span class="muted">—</span>'}</div>
-        </div>
-        <div class="detail-section">
-          <span class="ds-label">Website / LinkedIn</span>
-          <div class="ds-value">${c.web?`<a href="${esc(c.web)}" target="_blank" rel="noopener">${esc(c.web)}</a>`:'<span class="muted">—</span>'}</div>
-        </div>
-        <div class="detail-section">
-          <span class="ds-label">Location</span>
-          <div class="ds-value">${esc(c.location||'—')}</div>
-        </div>
-        <div class="detail-section">
-          <span class="ds-label">Source</span>
-          <div class="ds-value">${esc(c.source||'—')}</div>
-        </div>
-        <div class="detail-section">
-          <span class="ds-label">Importance</span>
-          <div class="ds-value"><span class="tag ${impClass(c.importance)}">${esc(c.importance||'—')}</span></div>
-        </div>
-        <div class="detail-section full">
-          <span class="ds-label">Role Tags</span>
-          <div class="tags-row">${(c.tags||[]).length?(c.tags).map(t=>`<span class="tag">${esc(t)}</span>`).join(''):'<span class="ds-value muted">None</span>'}</div>
+        <div class="detail-section"><span class="ds-label">Email</span><div class="ds-value">${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:'—'}</div></div>
+        <div class="detail-section"><span class="ds-label">Phone</span><div class="ds-value">${c.phone?`<a href="tel:${esc(c.phone)}">${esc(c.phone)}</a>`:'—'}</div></div>
+        <div class="detail-section"><span class="ds-label">Website / LinkedIn</span><div class="ds-value">${c.web?`<a href="${esc(c.web)}" target="_blank" rel="noopener">${esc(c.web)}</a>`:'—'}</div></div>
+        <div class="detail-section"><span class="ds-label">Location</span><div class="ds-value">${esc(c.location||'—')}</div></div>
+        <div class="detail-section"><span class="ds-label">Source</span><div class="ds-value">${esc(c.source||'—')}</div></div>
+        <div class="detail-section"><span class="ds-label">Importance</span><div class="ds-value"><span class="tag ${impClass(c.importance)}">${esc(c.importance||'—')}</span></div></div>
+        <div class="detail-section full"><span class="ds-label">Role Tags</span>
+          <div class="tags-row">${(c.tags||[]).length?c.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join(''):'<span style="color:var(--mid);font-size:13px">None</span>'}</div>
         </div>
         ${c.nextaction?`<div class="detail-section full"><span class="ds-label">Next Action</span><div class="ds-value">${esc(c.nextaction)}</div></div>`:''}
         ${c.notes?`<div class="detail-section full"><span class="ds-label">Notes</span><div class="notes-box">${esc(c.notes)}</div></div>`:''}
@@ -621,37 +776,30 @@ function selectContact(id){
 
 function toggleFav(id){
   const c=contacts.find(x=>x.id===id);
-  if(c){ c.favourite=!c.favourite; saveData(); renderList(); selectContact(id); }
+  if(c){ c.favourite=!c.favourite; scheduleSave(); renderList(); selectContact(id); }
 }
 function deleteContact(id){
   if(!confirm('Delete this contact?')) return;
   contacts=contacts.filter(x=>x.id!==id);
-  saveData(); selectedId=null; renderList();
+  scheduleSave(); selectedId=null; renderList();
   document.getElementById('contact-detail').innerHTML='<div class="detail-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a contact</p></div>';
 }
 
-/* TAG INPUT */
-function handleTagKey(e,prefix){
-  if(e.key==='Enter'){ e.preventDefault(); addTag(prefix); }
-}
-function addTag(prefix){
-  const inp=document.getElementById(prefix+'-tag-input');
+// ─── TAG INPUT ────────────────────────────────────────────────────────────────
+function handleTagKey(e){ if(e.key==='Enter'){ e.preventDefault(); addTag(); } }
+function addTag(){
+  const inp=document.getElementById('f-tag-input');
   const val=inp.value.trim();
   if(!val) return;
-  if(!currentTags.includes(val)){ currentTags.push(val); renderTagPills(prefix); }
-  inp.value='';
-  inp.focus();
+  if(!currentTags.includes(val)){ currentTags.push(val); renderTagPills(); }
+  inp.value=''; inp.focus();
 }
-function removeTag(prefix,tag){
-  currentTags=currentTags.filter(t=>t!==tag);
-  renderTagPills(prefix);
-}
-function renderTagPills(prefix){
-  const container=document.getElementById(prefix+'-tag-pills');
-  container.innerHTML=currentTags.map(t=>`<span class="tag-pill">${esc(t)}<button onclick="removeTag('${prefix}','${esc(t)}')" title="Remove">×</button></span>`).join('');
+function removeTag(tag){ currentTags=currentTags.filter(t=>t!==tag); renderTagPills(); }
+function renderTagPills(){
+  document.getElementById('f-tag-pills').innerHTML=currentTags.map(t=>`<span class="tag-pill">${esc(t)}<button onclick="removeTag('${esc(t)}')" title="Remove">×</button></span>`).join('');
 }
 
-/* ADD / EDIT CONTACT */
+// ─── CONTACT FORM ─────────────────────────────────────────────────────────────
 function openAddModal(){
   editingId=null;
   document.getElementById('modal-title').textContent='New Contact';
@@ -662,28 +810,20 @@ function openEditModal(id){
   editingId=id;
   const c=contacts.find(x=>x.id===id); if(!c) return;
   document.getElementById('modal-title').textContent='Edit Contact';
-  document.getElementById('f-first').value=c.first||'';
-  document.getElementById('f-last').value=c.last||'';
-  document.getElementById('f-company').value=c.company||'';
-  document.getElementById('f-title').value=c.title||'';
-  document.getElementById('f-email').value=c.email||'';
-  document.getElementById('f-phone').value=c.phone||'';
-  document.getElementById('f-web').value=c.web||'';
-  document.getElementById('f-location').value=c.location||'';
-  document.getElementById('f-source').value=c.source||'';
+  ['first','last','company','title','email','phone','web','location','source','nextaction','notes'].forEach(k=>{
+    const el=document.getElementById('f-'+k); if(el) el.value=c[k]||'';
+  });
   document.getElementById('f-importance').value=c.importance||'Medium';
-  document.getElementById('f-nextaction').value=c.nextaction||'';
-  document.getElementById('f-notes').value=c.notes||'';
-  currentTags=[...(c.tags||[])];
-  renderTagPills('f');
+  currentTags=[...(c.tags||[])]; renderTagPills();
   document.getElementById('contact-modal').classList.add('open');
 }
 function clearContactForm(){
-  ['f-first','f-last','f-company','f-title','f-email','f-phone','f-web','f-location','f-source','f-nextaction','f-notes'].forEach(id=>{ document.getElementById(id).value=''; });
+  ['first','last','company','title','email','phone','web','location','source','nextaction','notes'].forEach(k=>{
+    const el=document.getElementById('f-'+k); if(el) el.value='';
+  });
   document.getElementById('f-importance').value='Medium';
   document.getElementById('f-tag-input').value='';
-  currentTags=[];
-  renderTagPills('f');
+  currentTags=[]; renderTagPills();
 }
 function saveContact(){
   const first=document.getElementById('f-first').value.trim();
@@ -710,7 +850,7 @@ function saveContact(){
     data.added=Date.now(); data.favourite=false;
     contacts.push(data); selectedId=data.id;
   }
-  saveData(); closeModal('contact-modal'); renderList();
+  scheduleSave(); closeModal('contact-modal'); renderList();
   selectContact(editingId||selectedId);
 }
 
@@ -718,7 +858,7 @@ function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 document.getElementById('contact-modal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeModal('contact-modal'); });
 document.getElementById('prospect-modal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeModal('prospect-modal'); });
 
-/* PROSPECTS */
+// ─── PROSPECTS ────────────────────────────────────────────────────────────────
 const STAGE_META={
   initial:{label:'Initial Contact',cls:'stage-initial'},
   contact:{label:'In Contact',cls:'stage-contact'},
@@ -729,20 +869,20 @@ const STAGE_META={
 function renderProspects(){
   const grid=document.getElementById('prospect-grid');
   document.getElementById('prospect-count-label').textContent=prospects.length+' prospect'+(prospects.length!==1?'s':'');
-  if(!prospects.length){ grid.innerHTML='<div style="color:var(--mid);font-size:13px;grid-column:1/-1">No prospects yet — add one to start tracking opportunities.</div>'; return; }
+  if(!prospects.length){ grid.innerHTML='<div style="color:var(--mid);font-size:13px;grid-column:1/-1">No prospects yet.</div>'; return; }
   grid.innerHTML=prospects.map(p=>{
     const st=STAGE_META[p.stage]||STAGE_META.initial;
     return `<div class="prospect-card">
       <div class="pc-header">
         <div class="pc-avatar" style="background:${avatarColor(p.id)}">${initials(p)}</div>
-        <div><div class="pc-name">${esc(p.first||'')} ${esc(p.last||'')}</div>
+        <div><div class="pc-name">${esc(p.first)} ${esc(p.last)}</div>
         <div class="pc-company">${esc([p.type,p.company].filter(Boolean).join(' · ')||'—')}</div></div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
         <span class="pc-stage ${st.cls}">${st.label}</span>
         ${p.status&&p.status!=='Active'?`<span class="tag" style="font-size:10px">${esc(p.status)}</span>`:''}
       </div>
-      ${p.date||p.lastdate?`<div style="font-size:11px;color:var(--mid)">${p.date?'First contacted: '+p.date:''}${p.date&&p.lastdate?' &nbsp;·&nbsp; ':''}${p.lastdate?'Last: '+p.lastdate:''}</div>`:''}
+      ${p.date||p.lastdate?`<div style="font-size:11px;color:var(--mid)">${p.date?'First: '+p.date:''}${p.date&&p.lastdate?' · ':''}${p.lastdate?'Last: '+p.lastdate:''}</div>`:''}
       ${p.notes?`<div class="pc-notes">${esc(p.notes)}</div>`:''}
       <div class="pc-actions">
         <button class="pc-btn" onclick="editProspect('${p.id}')">Edit</button>
@@ -766,18 +906,11 @@ function editProspect(id){
   editingProspectId=id;
   const p=prospects.find(x=>x.id===id); if(!p) return;
   document.getElementById('pmodal-title').textContent='Edit Prospect';
-  document.getElementById('p-first').value=p.first||'';
-  document.getElementById('p-last').value=p.last||'';
-  document.getElementById('p-company').value=p.company||'';
-  document.getElementById('p-type').value=p.type||'';
-  document.getElementById('p-email').value=p.email||'';
-  document.getElementById('p-phone').value=p.phone||'';
-  document.getElementById('p-date').value=p.date||'';
-  document.getElementById('p-lastdate').value=p.lastdate||'';
+  ['first','last','company','type','email','phone','date','lastdate','source','notes'].forEach(k=>{
+    const el=document.getElementById('p-'+k); if(el) el.value=p[k]||'';
+  });
   document.getElementById('p-stage').value=p.stage||'initial';
-  document.getElementById('p-source').value=p.source||'';
   document.getElementById('p-status').value=p.status||'Active';
-  document.getElementById('p-notes').value=p.notes||'';
   document.getElementById('prospect-modal').classList.add('open');
 }
 function saveProspect(){
@@ -803,12 +936,12 @@ function saveProspect(){
     data.id='p_'+Date.now()+'_'+Math.random().toString(36).slice(2);
     data.added=Date.now(); prospects.push(data);
   }
-  saveProspectsData(); closeModal('prospect-modal'); renderProspects();
+  scheduleSave(); closeModal('prospect-modal'); renderProspects();
 }
 function deleteProspect(id){
   if(!confirm('Delete this prospect?')) return;
   prospects=prospects.filter(x=>x.id!==id);
-  saveProspectsData(); renderProspects();
+  scheduleSave(); renderProspects();
 }
 function promoteProspect(id){
   const p=prospects.find(x=>x.id===id);
@@ -820,11 +953,11 @@ function promoteProspect(id){
     tags:[], importance:'Medium', added:Date.now(), favourite:false
   };
   contacts.push(nc); prospects=prospects.filter(x=>x.id!==id);
-  saveData(); saveProspectsData(); renderProspects(); renderList();
+  scheduleSave(); renderProspects(); renderList();
   alert(nc.first+' '+nc.last+' moved to Contacts.');
 }
 
-/* SETTINGS */
+// ─── SETTINGS ─────────────────────────────────────────────────────────────────
 function changePassword(){
   const cur=document.getElementById('s-current').value;
   const nw=document.getElementById('s-new').value;
@@ -869,18 +1002,14 @@ function importJSON(evt){
       if(Array.isArray(data.contacts)){
         const ids=new Set(contacts.map(x=>x.id));
         data.contacts.forEach(c=>{ if(!ids.has(c.id)){ contacts.push(c); added++; } });
-        saveData();
       }
       if(Array.isArray(data.prospects)){
         const ids=new Set(prospects.map(x=>x.id));
         data.prospects.forEach(p=>{ if(!ids.has(p.id)) prospects.push(p); });
-        saveProspectsData();
       }
-      renderList(); renderProspects();
+      scheduleSave(); renderList(); renderProspects();
       msg.className='settings-msg ok'; msg.textContent='Imported '+added+' new contact(s).';
-    } catch(err){
-      msg.className='settings-msg err'; msg.textContent='Invalid backup file.';
-    }
+    }catch(e){ msg.className='settings-msg err'; msg.textContent='Invalid backup file.'; }
     evt.target.value='';
     setTimeout(()=>{ msg.textContent=''; },4000);
   };
@@ -889,8 +1018,7 @@ function importJSON(evt){
 function clearAllData(){
   if(!confirm('Delete ALL contacts and prospects? This cannot be undone.')) return;
   if(!confirm('Final confirmation — erase everything?')) return;
-  contacts=[]; prospects=[]; saveData(); saveProspectsData();
-  selectedId=null; renderList(); renderProspects();
+  contacts=[]; prospects=[]; scheduleSave(); selectedId=null; renderList(); renderProspects();
   document.getElementById('contact-detail').innerHTML='<div class="detail-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a contact</p></div>';
 }
 </script>
