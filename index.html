@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IH Film — Contacts</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBkMGQwZCIvPgogIDxyZWN0IHg9IjExIiB5PSIxMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8bGluZSB4MT0iNjUiIHkxPSIxMSIgeDI9IjY1IiB5Mj0iNjMiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxsaW5lIHgxPSIxMSIgeTE9IjM3IiB4Mj0iNjUiIHkyPSIzNyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPGxpbmUgeDE9IjExIiB5MT0iNjMiIHgyPSI2NSIgeTI9IjYzIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiLz4KPC9zdmc+">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMjAuOSAyMjEiPgogIDxyZWN0IHdpZHRoPSIyMjAuOSIgaGVpZ2h0PSIyMjEiIGZpbGw9IiMwZDBkMGQiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNS42LCAyNS42KSBzY2FsZSgwLjc2ODMpIj4KICAgIDxwYXRoIGQ9Ik0xNDYuMywySDEuNnY3My4yVjE0NnY3My4yaDE0NC43aDcyLjVWMkgxNDYuM3ogTTQuMiw0LjZoMTQyLjJ2NzAuNkg0LjJWNC42eiBNNC4yLDIxNi43di03MC42aDE0Mi4ydjcwLjZMNC4yLDIxNi43TDQuMiwyMTYuN3ogTTIxNi4zLDIxNi43SDE0OXYtNzMuMkg0LjJWNzcuOWgxNDQuN1Y0LjZoNjcuM3YyMTIuMUgyMTYuM3oiIGZpbGw9IndoaXRlIi8+CiAgPC9nPgo8L3N2Zz4=">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
@@ -241,6 +241,9 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .drive-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--mid);flex-shrink:0}
 .drive-badge .dot.connected{background:#7db87d}
 
+.type-chip{background:none;border:1px solid var(--border-light);color:var(--mid);font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:6px 12px;border-radius:3px;cursor:pointer;transition:all .2s}
+.type-chip:hover{border-color:var(--white);color:var(--white)}
+.type-chip.active{background:var(--dark3);border-color:var(--white);color:var(--white)}
 .poc-toggle-btn{background:none;border:1px solid var(--border-light);color:var(--mid);font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;border-radius:3px;cursor:pointer;transition:all .2s}
 .poc-toggle-btn:hover{border-color:var(--white);color:var(--white)}
 .poc-toggle-btn.active{background:var(--red);border-color:var(--red);color:var(--white)}
@@ -407,7 +410,6 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
           <div class="filter-chip" onclick="setAgencyTypeFilter('Production Company',this)"><span class="dot" style="background:#4a90d9"></span>Production Co.</div>
           <div class="filter-chip" onclick="setAgencyTypeFilter('Agency',this)"><span class="dot" style="background:#9b72cf"></span>Agency</div>
           <div class="filter-chip" onclick="setAgencyTypeFilter('Post House',this)"><span class="dot" style="background:#c8a96e"></span>Post House</div>
-          <div class="filter-chip" onclick="setAgencyTypeFilter('Broadcaster',this)"><span class="dot" style="background:#7db87d"></span>Broadcaster</div>
           <div class="filter-chip" onclick="setAgencyTypeFilter('Other',this)"><span class="dot" style="background:var(--mid)"></span>Other</div>
         </div>
       </div>
@@ -591,14 +593,14 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
     <div class="modal-title" id="agency-modal-title">New Agency</div>
     <div class="form-grid">
       <div class="form-group" style="grid-column:1/-1"><label>Organisation Name *</label><input id="ag-name" placeholder="e.g. Pulse Films, Framestore, BBC Studios"/></div>
-      <div class="form-group"><label>Business Type</label>
-        <select id="ag-type">
-          <option value="Production Company">Production Company</option>
-          <option value="Agency">Agency</option>
-          <option value="Post House">Post House</option>
-          <option value="Broadcaster">Broadcaster</option>
-          <option value="Other">Other</option>
-        </select>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>Business Type — select all that apply</label>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px" id="ag-type-chips">
+          <button type="button" class="type-chip" data-type="Production Company" onclick="toggleTypeChip(this)">Production Company</button>
+          <button type="button" class="type-chip" data-type="Agency" onclick="toggleTypeChip(this)">Agency</button>
+          <button type="button" class="type-chip" data-type="Post House" onclick="toggleTypeChip(this)">Post House</button>
+          <button type="button" class="type-chip" data-type="Other" onclick="toggleTypeChip(this)">Other</button>
+        </div>
       </div>
       <div class="form-group"><label>Location / City</label><input id="ag-location" placeholder="London, UK"/></div>
       <div class="form-group"><label>Website</label><input id="ag-web" placeholder="https://"/></div>
@@ -1314,11 +1316,23 @@ function clearAllData(){
 let agSortCol='name', agSortDir=1, selectedAgencyId=null;
 
 const AG_TYPE_COLORS={
-  'Production Company':'#4a90d9','Agency':'#9b72cf','Post House':'#c8a96e',
-  'Broadcaster':'#7db87d','Other':'#888'
+  'Production Company':'#4a90d9','Agency':'#9b72cf','Post House':'#c8a96e','Other':'#888'
 };
 
 function agInitials(a){ return (a.name||'?').substring(0,2).toUpperCase(); }
+
+// Multi-select type chips
+function toggleTypeChip(el){
+  el.classList.toggle('active');
+}
+function getSelectedTypes(){
+  return [...document.querySelectorAll('#ag-type-chips .type-chip.active')].map(el=>el.dataset.type);
+}
+function setTypeChips(types){
+  document.querySelectorAll('#ag-type-chips .type-chip').forEach(el=>{
+    el.classList.toggle('active',(types||[]).includes(el.dataset.type));
+  });
+}
 
 function setAgencyTypeFilter(val,el){
   agencyTypeFilter=val;
@@ -1338,16 +1352,19 @@ function setAgencySortCol(col){
 function getFilteredAgencies(){
   const q=document.getElementById('agency-search-input').value.toLowerCase();
   let list=agencies.filter(a=>{
-    if(agencyTypeFilter!=='all'&&a.type!==agencyTypeFilter) return false;
+    const types=Array.isArray(a.types)?a.types:(a.type?[a.type]:[]);
+    if(agencyTypeFilter!=='all'&&!types.includes(agencyTypeFilter)) return false;
     if(q){
-      const hay=[a.name,a.type,a.location,a.web,a.email,a.contactName,a.contactRole,a.notes,a.history,...(a.services||[]),...(a.tags||[])].filter(Boolean).join(' ').toLowerCase();
+      const hay=[a.name,...types,a.location,a.web,a.email,a.contactName,a.contactRole,a.notes,a.history,...(a.services||[]),...(a.tags||[])].filter(Boolean).join(' ').toLowerCase();
       if(!q.trim().split(/\s+/).every(w=>hay.includes(w))) return false;
     }
     return true;
   });
   list.sort((a,b)=>{
+    const at=Array.isArray(a.types)?a.types:(a.type?[a.type]:[]);
+    const bt=Array.isArray(b.types)?b.types:(b.type?[b.type]:[]);
     if(agSortCol==='name') return (a.name||'').localeCompare(b.name||'')*agSortDir;
-    if(agSortCol==='type') return (a.type||'').localeCompare(b.type||'')*agSortDir;
+    if(agSortCol==='type') return at.join(' ').localeCompare(bt.join(' '))*agSortDir;
     if(agSortCol==='location') return (a.location||'').localeCompare(b.location||'')*agSortDir;
     if(agSortCol==='services') return (a.services||[]).join(' ').localeCompare((b.services||[]).join(' '))*agSortDir;
     if(agSortCol==='contact') return (a.contactName||'').localeCompare(b.contactName||'')*agSortDir;
@@ -1365,11 +1382,15 @@ function renderAgencies(){
   if(!list.length){ tbody.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
   tbody.innerHTML=list.map(a=>{
-    const col=AG_TYPE_COLORS[a.type]||'#888';
+    const types=Array.isArray(a.types)?a.types:(a.type?[a.type]:[]);
+    const typeBadges=types.map(t=>{
+      const col=AG_TYPE_COLORS[t]||'#888';
+      return `<span class="ct-imp" style="background:${col}22;color:${col}">${esc(t)}</span>`;
+    }).join(' ');
     return `<tr class="${selectedAgencyId===a.id?'selected':''}" onclick="openAgencyDrawer('${a.id}')">
       <td style="padding-right:0;padding-left:14px"><div class="ct-avatar" style="background:${avatarColor(a.id)};border-radius:6px;font-size:10px">${agInitials(a)}</div></td>
       <td><div class="ct-name">${esc(a.name)}</div></td>
-      <td><span class="ct-imp" style="background:${col}22;color:${col}">${esc(a.type||'—')}</span></td>
+      <td><div style="display:flex;flex-wrap:wrap;gap:4px">${typeBadges||'<span style="color:var(--mid)">—</span>'}</div></td>
       <td><div class="ct-company">${esc(a.location||'—')}</div></td>
       <td><div class="ct-tags">${(a.services||[]).map(s=>`<span class="ct-tag">${esc(s)}</span>`).join('')||'<span style="color:var(--mid);font-size:12px">—</span>'}</div></td>
       <td><div class="ct-name" style="font-weight:400">${esc(a.contactName||'—')}</div>${a.contactRole?`<div class="ct-company">${esc(a.contactRole)}</div>`:''}</td>
@@ -1380,19 +1401,30 @@ function renderAgencies(){
 function openAgencyDrawer(id){
   selectedAgencyId=id; renderAgencies();
   const a=agencies.find(x=>x.id===id); if(!a) return;
-  const col=AG_TYPE_COLORS[a.type]||'#888';
+  const types=Array.isArray(a.types)?a.types:(a.type?[a.type]:[]);
+  const typeBadges=types.map(t=>{
+    const col=AG_TYPE_COLORS[t]||'#888';
+    return `<span class="ct-imp" style="background:${col}22;color:${col}">${esc(t)}</span>`;
+  }).join(' ');
   const av=document.getElementById('ag-d-avatar');
   av.textContent=agInitials(a); av.style.background=avatarColor(a.id);
   document.getElementById('ag-d-name').textContent=a.name||'';
-  document.getElementById('ag-d-type').textContent=a.type||'';
+  document.getElementById('ag-d-type').textContent=types.join(' · ')||'';
+
+  // Resolve linked contact for phone
+  let contactPhone='';
+  if(a.linkedContactId){
+    const linked=contacts.find(x=>x.id===a.linkedContactId);
+    if(linked) contactPhone=linked.phone||'';
+  }
+
   document.getElementById('ag-d-body').innerHTML=`
     <div class="drawer-section row">
       <div><span class="ds-label">Location</span><div class="ds-value">${esc(a.location||'—')}</div></div>
-      <div><span class="ds-label">Business Type</span><div class="ds-value"><span class="ct-imp" style="background:${col}22;color:${col}">${esc(a.type||'—')}</span></div></div>
+      <div><span class="ds-label">Business Type</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${typeBadges||'<span class="ds-muted">—</span>'}</div></div>
     </div>
     <div class="drawer-section row">
-      <div><span class="ds-label">Email</span><div class="ds-value">${a.email?`<a href="mailto:${esc(a.email)}">${esc(a.email)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
-      <div><span class="ds-label">Phone</span><div class="ds-value">${a.phone?`<a href="tel:${esc(a.phone)}">${esc(a.phone)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
+      <div><span class="ds-label">General Email</span><div class="ds-value">${a.email?`<a href="mailto:${esc(a.email)}">${esc(a.email)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
     </div>
     ${a.web?`<div class="drawer-section"><span class="ds-label">Website</span><div class="ds-value"><a href="${esc(a.web)}" target="_blank" rel="noopener">${esc(a.web)}</a></div></div>`:''}
     ${(a.contactName||a.contactRole||a.contactEmail)?`
@@ -1400,8 +1432,9 @@ function openAgencyDrawer(id){
       <span class="ds-label">Point of Contact${a.linkedContactId?' <span style="color:var(--gold);font-size:9px;letter-spacing:.1em">LINKED</span>':''}</span>
       <div class="ds-value" style="font-weight:700;margin-top:4px">${esc(a.contactName||'—')}</div>
       ${a.contactRole?`<div class="ct-company">${esc(a.contactRole)}</div>`:''}
-      <div style="display:flex;gap:1rem;margin-top:6px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:4px;margin-top:8px">
         ${a.contactEmail?`<a href="mailto:${esc(a.contactEmail)}" style="color:var(--gold);font-size:12px;text-decoration:none">${esc(a.contactEmail)}</a>`:''}
+        ${contactPhone?`<a href="tel:${esc(contactPhone)}" style="color:var(--gold);font-size:12px;text-decoration:none">${esc(contactPhone)}</a>`:''}
       </div>
     </div>`:''}
     <div class="drawer-section"><span class="ds-label">Services I Can Provide</span>
@@ -1506,7 +1539,7 @@ function clearLinkedContact(){
 
 function clearAgencyForm(){
   ['ag-name','ag-location','ag-web','ag-email','ag-contact-name','ag-contact-role','ag-contact-email','ag-history','ag-notes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
-  document.getElementById('ag-type').value='Production Company';
+  setTypeChips([]);
   document.getElementById('ag-service-input').value='';
   document.getElementById('ag-tag-input').value='';
   currentAgServices=[]; currentAgTags=[];
@@ -1526,7 +1559,8 @@ function openEditAgencyModal(id){
   const a=agencies.find(x=>x.id===id); if(!a) return;
   document.getElementById('agency-modal-title').textContent='Edit Agency';
   document.getElementById('ag-name').value=a.name||'';
-  document.getElementById('ag-type').value=a.type||'Production Company';
+  const types=Array.isArray(a.types)?a.types:(a.type?[a.type]:[]);
+  setTypeChips(types);
   document.getElementById('ag-location').value=a.location||'';
   document.getElementById('ag-web').value=a.web||'';
   document.getElementById('ag-email').value=a.email||'';
@@ -1534,7 +1568,6 @@ function openEditAgencyModal(id){
   document.getElementById('ag-notes').value=a.notes||'';
   currentAgServices=[...(a.services||[])]; currentAgTags=[...(a.tags||[])];
   renderAgServicePills(); renderAgTagPills();
-  // restore POC mode
   if(a.linkedContactId){
     setPocMode('link');
     selectLinkedContact(a.linkedContactId);
@@ -1556,11 +1589,10 @@ function saveAgency(){
   const name=document.getElementById('ag-name').value.trim();
   if(!name){ alert('Organisation name is required'); return; }
 
-  // Resolve point of contact
   let contactName='', contactRole='', contactEmail='', linkedContactId='';
   if(pocMode==='link'){
-    linkedContactId = document.getElementById('ag-linked-contact-id').value;
-    const linked = contacts.find(x=>x.id===linkedContactId);
+    linkedContactId=document.getElementById('ag-linked-contact-id').value;
+    const linked=contacts.find(x=>x.id===linkedContactId);
     if(linked){ contactName=(linked.first||'')+' '+(linked.last||''); contactRole=linked.title||''; contactEmail=linked.email||''; }
   } else {
     contactName=document.getElementById('ag-contact-name').value.trim();
@@ -1569,12 +1601,12 @@ function saveAgency(){
   }
 
   const data={
-    name, type:document.getElementById('ag-type').value,
+    name, types:getSelectedTypes(),
     location:document.getElementById('ag-location').value.trim(),
     web:document.getElementById('ag-web').value.trim(),
     email:document.getElementById('ag-email').value.trim(),
     contactName, contactRole, contactEmail,
-    linkedContactId: linkedContactId||null,
+    linkedContactId:linkedContactId||null,
     history:document.getElementById('ag-history').value.trim(),
     notes:document.getElementById('ag-notes').value.trim(),
     services:[...currentAgServices], tags:[...currentAgTags]
