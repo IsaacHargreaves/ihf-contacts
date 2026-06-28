@@ -289,6 +289,7 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
   <nav>
     <button class="active" onclick="switchTab('contacts',this)">Contacts</button>
     <button onclick="switchTab('prospects',this)">Prospects</button>
+    <button onclick="switchTab('agencies',this)">Agencies</button>
     <button onclick="switchTab('settings',this)">Settings</button>
   </nav>
 
@@ -381,6 +382,78 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
         <button class="btn-add" onclick="openAddProspectModal()">+ New Prospect</button>
       </div>
       <div id="prospect-grid" class="prospect-grid"></div>
+    </div>
+  </div>
+
+  <!-- AGENCIES TAB -->
+  <div id="tab-agencies" class="main-area" style="display:none">
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Search</div>
+        <input class="search-box" type="search" placeholder="Name, type, service, location…" id="agency-search-input" oninput="renderAgencies()"/>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Business Type</div>
+        <div class="filter-group" id="agency-type-filter">
+          <div class="filter-chip active" onclick="setAgencyTypeFilter('all',this)"><span class="dot" style="background:var(--mid)"></span>All</div>
+          <div class="filter-chip" onclick="setAgencyTypeFilter('Production Company',this)"><span class="dot" style="background:#4a90d9"></span>Production Co.</div>
+          <div class="filter-chip" onclick="setAgencyTypeFilter('Agency',this)"><span class="dot" style="background:#9b72cf"></span>Agency</div>
+          <div class="filter-chip" onclick="setAgencyTypeFilter('Post House',this)"><span class="dot" style="background:#c8a96e"></span>Post House</div>
+          <div class="filter-chip" onclick="setAgencyTypeFilter('Broadcaster',this)"><span class="dot" style="background:#7db87d"></span>Broadcaster</div>
+          <div class="filter-chip" onclick="setAgencyTypeFilter('Other',this)"><span class="dot" style="background:var(--mid)"></span>Other</div>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Sort</div>
+        <select class="sort-select" id="agency-sort-select" onchange="renderAgencies()">
+          <option value="name">Name A–Z</option>
+          <option value="name-desc">Name Z–A</option>
+          <option value="recent">Date Added</option>
+        </select>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+      <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--dark1)">
+        <span class="count" id="agency-count-label" style="font-size:12px;color:var(--mid)"></span>
+        <button class="btn-add" onclick="openAddAgencyModal()">+ New Agency</button>
+      </div>
+      <div class="contact-table-wrap">
+        <table class="contact-table">
+          <thead>
+            <tr>
+              <th style="width:36px;padding-right:0"></th>
+              <th onclick="setAgencySortCol('name')">Organisation <span class="sort-arrow" id="ag-arr-name">↕</span></th>
+              <th onclick="setAgencySortCol('type')">Type <span class="sort-arrow" id="ag-arr-type">↕</span></th>
+              <th onclick="setAgencySortCol('location')">Location <span class="sort-arrow" id="ag-arr-location">↕</span></th>
+              <th onclick="setAgencySortCol('services')">Services I Can Provide <span class="sort-arrow" id="ag-arr-services">↕</span></th>
+              <th onclick="setAgencySortCol('contact')">Point of Contact <span class="sort-arrow" id="ag-arr-contact">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="agency-tbody"></tbody>
+        </table>
+        <div id="agency-table-empty" class="empty-table" style="display:none">No agencies found</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENCY DETAIL DRAWER -->
+  <div class="drawer-overlay" id="agency-drawer-overlay" onclick="closeAgencyDrawer(event)">
+    <div class="drawer" id="agency-drawer">
+      <div class="drawer-header">
+        <div class="drawer-avatar-area">
+          <div class="drawer-avatar" id="ag-d-avatar" style="border-radius:8px;font-size:13px"></div>
+          <div>
+            <div class="drawer-name" id="ag-d-name"></div>
+            <div class="drawer-company" id="ag-d-type"></div>
+          </div>
+        </div>
+        <div class="drawer-actions">
+          <button class="btn-edit" onclick="openEditAgencyModalFromDrawer()">Edit</button>
+          <button class="btn-icon danger" onclick="deleteFromAgencyDrawer()" title="Delete">✕</button>
+          <button class="drawer-close" onclick="closeAgencyDrawer()">✕</button>
+        </div>
+      </div>
+      <div class="drawer-body" id="ag-d-body"></div>
     </div>
   </div>
 
@@ -504,6 +577,69 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
   </div>
 </div>
 
+<!-- AGENCY MODAL -->
+<div class="modal-overlay" id="agency-modal">
+  <div class="modal">
+    <div class="modal-title" id="agency-modal-title">New Agency</div>
+    <div class="form-grid">
+      <div class="form-group" style="grid-column:1/-1"><label>Organisation Name *</label><input id="ag-name" placeholder="e.g. Pulse Films, Framestore, BBC Studios"/></div>
+      <div class="form-group"><label>Business Type</label>
+        <select id="ag-type">
+          <option value="Production Company">Production Company</option>
+          <option value="Agency">Agency</option>
+          <option value="Post House">Post House</option>
+          <option value="Broadcaster">Broadcaster</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Location / City</label><input id="ag-location" placeholder="London, UK"/></div>
+      <div class="form-group"><label>Website</label><input id="ag-web" placeholder="https://"/></div>
+      <div class="form-group"><label>General Email</label><input id="ag-email" type="email" placeholder="info@company.com"/></div>
+      <div class="form-group"><label>Phone</label><input id="ag-phone" placeholder="+44 20 0000 0000"/></div>
+      <div class="form-divider">Point of Contact</div>
+      <div class="form-group"><label>Contact Name</label><input id="ag-contact-name" placeholder="Jane Smith"/></div>
+      <div class="form-group"><label>Contact Role</label><input id="ag-contact-role" placeholder="Head of Production"/></div>
+      <div class="form-group"><label>Contact Email</label><input id="ag-contact-email" type="email" placeholder="jane@company.com"/></div>
+      <div class="form-group"><label>Contact Phone</label><input id="ag-contact-phone" placeholder="+44 7700 000000"/></div>
+      <div class="form-divider">Services & Tags</div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>Services I Can Provide — press Enter or + to add each one</label>
+        <div class="tag-input-wrap">
+          <div class="tag-input-row">
+            <input id="ag-service-input" placeholder="e.g. Cinematography, Directing, Colour Grade…" onkeydown="handleAgServiceKey(event)"/>
+            <button class="tag-add-btn" onclick="addAgService()" title="Add">+</button>
+          </div>
+          <div class="tag-pills" id="ag-service-pills"></div>
+          <span class="tag-hint">Press Enter or + to add · Click × to remove</span>
+        </div>
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>Additional Tags — genre, style, sector etc.</label>
+        <div class="tag-input-wrap">
+          <div class="tag-input-row">
+            <input id="ag-tag-input" placeholder="e.g. Documentary, Commercial, Drama…" onkeydown="handleAgTagKey(event)"/>
+            <button class="tag-add-btn" onclick="addAgTag()" title="Add">+</button>
+          </div>
+          <div class="tag-pills" id="ag-tag-pills"></div>
+        </div>
+      </div>
+      <div class="form-divider">Notes</div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>History / Context</label>
+        <textarea id="ag-history" rows="2" placeholder="How did you come across them? Any past work together?"></textarea>
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>Notes</label>
+        <textarea id="ag-notes" rows="3" placeholder="Opportunities, requirements, anything worth knowing…"></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('agency-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveAgency()">Save Agency</button>
+    </div>
+  </div>
+</div>
+
 <!-- PROSPECT MODAL -->
 <div class="modal-overlay" id="prospect-modal">
   <div class="modal">
@@ -560,8 +696,9 @@ const AUTH_KEY = 'ihfilm_auth';
 const DRIVE_TOKEN_KEY = 'ihfilm_drive_token';
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-let contacts = [], prospects = [], selectedId = null, editingId = null, editingProspectId = null;
+let contacts = [], prospects = [], agencies = [], selectedId = null, editingId = null, editingProspectId = null, editingAgencyId = null;
 let impFilter = 'all', showFavOnly = false, currentTags = [];
+let agencyTypeFilter = 'all', currentAgServices = [], currentAgTags = [];
 let driveToken = null, driveFileId = null, saveTimer = null;
 
 // ─── UTILS ────────────────────────────────────────────────────────────────────
@@ -580,10 +717,12 @@ function setSyncStatus(msg, cls=''){
 function loadLocal(){
   try{ contacts = JSON.parse(localStorage.getItem('ihfilm_contacts')||'[]'); }catch(e){ contacts=[]; }
   try{ prospects = JSON.parse(localStorage.getItem('ihfilm_prospects')||'[]'); }catch(e){ prospects=[]; }
+  try{ agencies = JSON.parse(localStorage.getItem('ihfilm_agencies')||'[]'); }catch(e){ agencies=[]; }
 }
 function saveLocal(){
   localStorage.setItem('ihfilm_contacts', JSON.stringify(contacts));
   localStorage.setItem('ihfilm_prospects', JSON.stringify(prospects));
+  localStorage.setItem('ihfilm_agencies', JSON.stringify(agencies));
 }
 
 // ─── GOOGLE DRIVE ─────────────────────────────────────────────────────────────
@@ -601,7 +740,7 @@ function signInWithGoogle(){
       updateDriveBadge(true);
       setSyncStatus('Connecting to Drive…','syncing');
       await loadFromDrive();
-      renderList(); renderProspects();
+      renderList(); renderProspects(); renderAgencies();
     }
   });
   client.requestAccessToken();
@@ -636,6 +775,7 @@ async function loadFromDrive(){
     const data = await resp.json();
     if(Array.isArray(data.contacts)) contacts = data.contacts;
     if(Array.isArray(data.prospects)) prospects = data.prospects;
+    if(Array.isArray(data.agencies)) agencies = data.agencies;
     saveLocal();
     setSyncStatus('Synced from Drive','ok');
     setTimeout(()=>setSyncStatus('Drive connected','ok'), 2000);
@@ -647,7 +787,7 @@ async function loadFromDrive(){
 async function saveToDrive(){
   if(!driveToken){ saveLocal(); return; }
   setSyncStatus('Saving…','syncing');
-  const payload = JSON.stringify({ contacts, prospects, savedAt: new Date().toISOString() });
+  const payload = JSON.stringify({ contacts, prospects, agencies, savedAt: new Date().toISOString() });
   try{
     if(!driveFileId){
       // Create new file
@@ -718,7 +858,7 @@ function unlock(){
     localStorage.setItem(AUTH_KEY,'1');
     document.getElementById('lock').style.display='none';
     document.getElementById('app').style.display='flex';
-    loadLocal(); renderList(); renderProspects();
+    loadLocal(); renderList(); renderProspects(); renderAgencies();
     setSyncStatus('Local storage','');
   } else if(!v){ setError('Enter your password');
   } else { setError('Incorrect password'); document.getElementById('pass-input').value=''; }
@@ -746,11 +886,11 @@ window.addEventListener('load', async ()=>{
     updateDriveBadge(true);
     setSyncStatus('Reconnecting to Drive…','syncing');
     await loadFromDrive();
-    renderList(); renderProspects();
+    renderList(); renderProspects(); renderAgencies();
   } else if(authMode==='1'){
     document.getElementById('lock').style.display='none';
     document.getElementById('app').style.display='flex';
-    renderList(); renderProspects();
+    renderList(); renderProspects(); renderAgencies();
   }
 });
 
@@ -760,6 +900,7 @@ function switchTab(tab,btn){
   btn.classList.add('active');
   document.getElementById('tab-contacts').style.display=tab==='contacts'?'flex':'none';
   document.getElementById('tab-prospects').style.display=tab==='prospects'?'flex':'none';
+  document.getElementById('tab-agencies').style.display=tab==='agencies'?'flex':'none';
   document.getElementById('tab-settings').style.display=tab==='settings'?'flex':'none';
   if(tab==='settings') updateDriveBadge(!!driveToken);
 }
@@ -1118,7 +1259,11 @@ function importJSON(evt){
         const ids=new Set(prospects.map(x=>x.id));
         data.prospects.forEach(p=>{ if(!ids.has(p.id)) prospects.push(p); });
       }
-      scheduleSave(); renderList(); renderProspects();
+      if(Array.isArray(data.agencies)){
+        const ids=new Set(agencies.map(x=>x.id));
+        data.agencies.forEach(a=>{ if(!ids.has(a.id)) agencies.push(a); });
+      }
+      scheduleSave(); renderList(); renderProspects(); renderAgencies();
       msg.className='settings-msg ok'; msg.textContent='Imported '+added+' new contact(s).';
     }catch(e){ msg.className='settings-msg err'; msg.textContent='Invalid backup file.'; }
     evt.target.value='';
@@ -1127,11 +1272,231 @@ function importJSON(evt){
   reader.readAsText(file);
 }
 function clearAllData(){
-  if(!confirm('Delete ALL contacts and prospects? This cannot be undone.')) return;
+  if(!confirm('Delete ALL contacts, prospects and agencies? This cannot be undone.')) return;
   if(!confirm('Final confirmation — erase everything?')) return;
-  contacts=[]; prospects=[]; scheduleSave(); selectedId=null; renderList(); renderProspects();
-  document.getElementById('contact-detail').innerHTML='<div class="detail-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a contact</p></div>';
+  contacts=[]; prospects=[]; agencies=[]; scheduleSave(); selectedId=null;
+  renderList(); renderProspects(); renderAgencies();
 }
+
+// ─── AGENCIES ─────────────────────────────────────────────────────────────────
+let agSortCol='name', agSortDir=1, selectedAgencyId=null;
+
+const AG_TYPE_COLORS={
+  'Production Company':'#4a90d9','Agency':'#9b72cf','Post House':'#c8a96e',
+  'Broadcaster':'#7db87d','Other':'#888'
+};
+
+function agInitials(a){ return (a.name||'?').substring(0,2).toUpperCase(); }
+
+function setAgencyTypeFilter(val,el){
+  agencyTypeFilter=val;
+  document.querySelectorAll('#agency-type-filter .filter-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active'); renderAgencies();
+}
+
+function setAgencySortCol(col){
+  if(agSortCol===col) agSortDir*=-1; else { agSortCol=col; agSortDir=1; }
+  document.querySelectorAll('#tab-agencies .contact-table th').forEach(th=>th.classList.remove('sorted'));
+  document.querySelectorAll('[id^="ag-arr-"]').forEach(el=>el.textContent='↕');
+  const arrEl=document.getElementById('ag-arr-'+col);
+  if(arrEl){ arrEl.closest('th').classList.add('sorted'); arrEl.textContent=agSortDir===1?'↑':'↓'; }
+  renderAgencies();
+}
+
+function getFilteredAgencies(){
+  const q=document.getElementById('agency-search-input').value.toLowerCase();
+  let list=agencies.filter(a=>{
+    if(agencyTypeFilter!=='all'&&a.type!==agencyTypeFilter) return false;
+    if(q){
+      const hay=[a.name,a.type,a.location,a.web,a.email,a.contactName,a.contactRole,a.notes,a.history,...(a.services||[]),...(a.tags||[])].filter(Boolean).join(' ').toLowerCase();
+      if(!q.trim().split(/\s+/).every(w=>hay.includes(w))) return false;
+    }
+    return true;
+  });
+  list.sort((a,b)=>{
+    if(agSortCol==='name') return (a.name||'').localeCompare(b.name||'')*agSortDir;
+    if(agSortCol==='type') return (a.type||'').localeCompare(b.type||'')*agSortDir;
+    if(agSortCol==='location') return (a.location||'').localeCompare(b.location||'')*agSortDir;
+    if(agSortCol==='services') return (a.services||[]).join(' ').localeCompare((b.services||[]).join(' '))*agSortDir;
+    if(agSortCol==='contact') return (a.contactName||'').localeCompare(b.contactName||'')*agSortDir;
+    return 0;
+  });
+  return list;
+}
+
+function renderAgencies(){
+  const list=getFilteredAgencies();
+  const tbody=document.getElementById('agency-tbody');
+  const empty=document.getElementById('agency-table-empty');
+  if(!tbody) return;
+  document.getElementById('agency-count-label').textContent=list.length+' agenc'+(list.length===1?'y':'ies');
+  if(!list.length){ tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  tbody.innerHTML=list.map(a=>{
+    const col=AG_TYPE_COLORS[a.type]||'#888';
+    return `<tr class="${selectedAgencyId===a.id?'selected':''}" onclick="openAgencyDrawer('${a.id}')">
+      <td style="padding-right:0;padding-left:14px"><div class="ct-avatar" style="background:${avatarColor(a.id)};border-radius:6px;font-size:10px">${agInitials(a)}</div></td>
+      <td><div class="ct-name">${esc(a.name)}</div></td>
+      <td><span class="ct-imp" style="background:${col}22;color:${col}">${esc(a.type||'—')}</span></td>
+      <td><div class="ct-company">${esc(a.location||'—')}</div></td>
+      <td><div class="ct-tags">${(a.services||[]).map(s=>`<span class="ct-tag">${esc(s)}</span>`).join('')||'<span style="color:var(--mid);font-size:12px">—</span>'}</div></td>
+      <td><div class="ct-name" style="font-weight:400">${esc(a.contactName||'—')}</div>${a.contactRole?`<div class="ct-company">${esc(a.contactRole)}</div>`:''}</td>
+    </tr>`;
+  }).join('');
+}
+
+function openAgencyDrawer(id){
+  selectedAgencyId=id; renderAgencies();
+  const a=agencies.find(x=>x.id===id); if(!a) return;
+  const col=AG_TYPE_COLORS[a.type]||'#888';
+  const av=document.getElementById('ag-d-avatar');
+  av.textContent=agInitials(a); av.style.background=avatarColor(a.id);
+  document.getElementById('ag-d-name').textContent=a.name||'';
+  document.getElementById('ag-d-type').textContent=a.type||'';
+  document.getElementById('ag-d-body').innerHTML=`
+    <div class="drawer-section row">
+      <div><span class="ds-label">Location</span><div class="ds-value">${esc(a.location||'—')}</div></div>
+      <div><span class="ds-label">Business Type</span><div class="ds-value"><span class="ct-imp" style="background:${col}22;color:${col}">${esc(a.type||'—')}</span></div></div>
+    </div>
+    <div class="drawer-section row">
+      <div><span class="ds-label">Email</span><div class="ds-value">${a.email?`<a href="mailto:${esc(a.email)}">${esc(a.email)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
+      <div><span class="ds-label">Phone</span><div class="ds-value">${a.phone?`<a href="tel:${esc(a.phone)}">${esc(a.phone)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
+    </div>
+    ${a.web?`<div class="drawer-section"><span class="ds-label">Website</span><div class="ds-value"><a href="${esc(a.web)}" target="_blank" rel="noopener">${esc(a.web)}</a></div></div>`:''}
+    ${(a.contactName||a.contactRole||a.contactEmail||a.contactPhone)?`
+    <div class="drawer-section" style="background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:12px">
+      <span class="ds-label">Point of Contact</span>
+      <div class="ds-value" style="font-weight:700;margin-top:4px">${esc(a.contactName||'—')}</div>
+      ${a.contactRole?`<div class="ct-company">${esc(a.contactRole)}</div>`:''}
+      <div style="display:flex;gap:1rem;margin-top:6px;flex-wrap:wrap">
+        ${a.contactEmail?`<a href="mailto:${esc(a.contactEmail)}" style="color:var(--gold);font-size:12px;text-decoration:none">${esc(a.contactEmail)}</a>`:''}
+        ${a.contactPhone?`<a href="tel:${esc(a.contactPhone)}" style="color:var(--gold);font-size:12px;text-decoration:none">${esc(a.contactPhone)}</a>`:''}
+      </div>
+    </div>`:''}
+    <div class="drawer-section"><span class="ds-label">Services I Can Provide</span>
+      <div class="ct-tags" style="margin-top:4px">${(a.services||[]).length?a.services.map(s=>`<span class="ct-tag">${esc(s)}</span>`).join(''):'<span class="ds-muted">None listed</span>'}</div>
+    </div>
+    ${(a.tags||[]).length?`<div class="drawer-section"><span class="ds-label">Tags</span><div class="ct-tags" style="margin-top:4px">${a.tags.map(t=>`<span class="ct-tag">${esc(t)}</span>`).join('')}</div></div>`:''}
+    ${a.history?`<div class="drawer-section"><span class="ds-label">History / Context</span><div class="notes-box">${esc(a.history)}</div></div>`:''}
+    ${a.notes?`<div class="drawer-section"><span class="ds-label">Notes</span><div class="notes-box">${esc(a.notes)}</div></div>`:''}
+  `;
+  document.getElementById('agency-drawer-overlay').classList.add('open');
+}
+
+function closeAgencyDrawer(e){
+  if(e && e.target!==document.getElementById('agency-drawer-overlay')) return;
+  document.getElementById('agency-drawer-overlay').classList.remove('open');
+  selectedAgencyId=null; renderAgencies();
+}
+
+function openEditAgencyModalFromDrawer(){ openEditAgencyModal(selectedAgencyId); }
+
+function deleteFromAgencyDrawer(){
+  if(!confirm('Delete this agency?')) return;
+  agencies=agencies.filter(x=>x.id!==selectedAgencyId);
+  scheduleSave(); selectedAgencyId=null;
+  document.getElementById('agency-drawer-overlay').classList.remove('open');
+  renderAgencies();
+}
+
+// Agency tag/service inputs
+function handleAgServiceKey(e){ if(e.key==='Enter'){ e.preventDefault(); addAgService(); } }
+function addAgService(){
+  const inp=document.getElementById('ag-service-input');
+  const val=inp.value.trim(); if(!val) return;
+  if(!currentAgServices.includes(val)){ currentAgServices.push(val); renderAgServicePills(); }
+  inp.value=''; inp.focus();
+}
+function removeAgService(s){ currentAgServices=currentAgServices.filter(x=>x!==s); renderAgServicePills(); }
+function renderAgServicePills(){
+  document.getElementById('ag-service-pills').innerHTML=currentAgServices.map(s=>`<span class="tag-pill">${esc(s)}<button onclick="removeAgService('${esc(s)}')" title="Remove">×</button></span>`).join('');
+}
+
+function handleAgTagKey(e){ if(e.key==='Enter'){ e.preventDefault(); addAgTag(); } }
+function addAgTag(){
+  const inp=document.getElementById('ag-tag-input');
+  const val=inp.value.trim(); if(!val) return;
+  if(!currentAgTags.includes(val)){ currentAgTags.push(val); renderAgTagPills(); }
+  inp.value=''; inp.focus();
+}
+function removeAgTag(t){ currentAgTags=currentAgTags.filter(x=>x!==t); renderAgTagPills(); }
+function renderAgTagPills(){
+  document.getElementById('ag-tag-pills').innerHTML=currentAgTags.map(t=>`<span class="tag-pill">${esc(t)}<button onclick="removeAgTag('${esc(t)}')" title="Remove">×</button></span>`).join('');
+}
+
+function clearAgencyForm(){
+  ['ag-name','ag-location','ag-web','ag-email','ag-phone','ag-contact-name','ag-contact-role','ag-contact-email','ag-contact-phone','ag-history','ag-notes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('ag-type').value='Production Company';
+  document.getElementById('ag-service-input').value='';
+  document.getElementById('ag-tag-input').value='';
+  currentAgServices=[]; currentAgTags=[];
+  renderAgServicePills(); renderAgTagPills();
+}
+
+function openAddAgencyModal(){
+  editingAgencyId=null;
+  document.getElementById('agency-modal-title').textContent='New Agency';
+  clearAgencyForm();
+  document.getElementById('agency-modal').classList.add('open');
+}
+
+function openEditAgencyModal(id){
+  editingAgencyId=id;
+  const a=agencies.find(x=>x.id===id); if(!a) return;
+  document.getElementById('agency-modal-title').textContent='Edit Agency';
+  document.getElementById('ag-name').value=a.name||'';
+  document.getElementById('ag-type').value=a.type||'Production Company';
+  document.getElementById('ag-location').value=a.location||'';
+  document.getElementById('ag-web').value=a.web||'';
+  document.getElementById('ag-email').value=a.email||'';
+  document.getElementById('ag-phone').value=a.phone||'';
+  document.getElementById('ag-contact-name').value=a.contactName||'';
+  document.getElementById('ag-contact-role').value=a.contactRole||'';
+  document.getElementById('ag-contact-email').value=a.contactEmail||'';
+  document.getElementById('ag-contact-phone').value=a.contactPhone||'';
+  document.getElementById('ag-history').value=a.history||'';
+  document.getElementById('ag-notes').value=a.notes||'';
+  currentAgServices=[...(a.services||[])]; currentAgTags=[...(a.tags||[])];
+  renderAgServicePills(); renderAgTagPills();
+  document.getElementById('agency-modal').classList.add('open');
+}
+
+function saveAgency(){
+  // flush any pending input
+  const ps=document.getElementById('ag-service-input').value.trim();
+  if(ps&&!currentAgServices.includes(ps)){ currentAgServices.push(ps); document.getElementById('ag-service-input').value=''; }
+  const pt=document.getElementById('ag-tag-input').value.trim();
+  if(pt&&!currentAgTags.includes(pt)){ currentAgTags.push(pt); document.getElementById('ag-tag-input').value=''; }
+
+  const name=document.getElementById('ag-name').value.trim();
+  if(!name){ alert('Organisation name is required'); return; }
+  const data={
+    name, type:document.getElementById('ag-type').value,
+    location:document.getElementById('ag-location').value.trim(),
+    web:document.getElementById('ag-web').value.trim(),
+    email:document.getElementById('ag-email').value.trim(),
+    phone:document.getElementById('ag-phone').value.trim(),
+    contactName:document.getElementById('ag-contact-name').value.trim(),
+    contactRole:document.getElementById('ag-contact-role').value.trim(),
+    contactEmail:document.getElementById('ag-contact-email').value.trim(),
+    contactPhone:document.getElementById('ag-contact-phone').value.trim(),
+    history:document.getElementById('ag-history').value.trim(),
+    notes:document.getElementById('ag-notes').value.trim(),
+    services:[...currentAgServices], tags:[...currentAgTags]
+  };
+  if(editingAgencyId){
+    const idx=agencies.findIndex(x=>x.id===editingAgencyId);
+    if(idx>-1) agencies[idx]={...agencies[idx],...data};
+  } else {
+    data.id='ag_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+    data.added=Date.now(); agencies.push(data);
+    selectedAgencyId=data.id;
+  }
+  scheduleSave(); closeModal('agency-modal'); renderAgencies();
+  openAgencyDrawer(editingAgencyId||selectedAgencyId);
+}
+
+document.getElementById('agency-modal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeModal('agency-modal'); });
 </script>
 </body>
 </html>
