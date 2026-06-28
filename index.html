@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IH Film — Contacts</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBkMGQwZCIvPgogIDxyZWN0IHg9IjEwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMuNSIvPgogIDxsaW5lIHgxPSI2NCIgeTE9IjEwIiB4Mj0iNjQiIHkyPSI5MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzLjUiLz4KICA8bGluZSB4MT0iMTAiIHkxPSIzNyIgeDI9IjY0IiB5Mj0iMzciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMy41Ii8+CiAgPGxpbmUgeDE9IjEwIiB5MT0iNjMiIHgyPSI2NCIgeTI9IjYzIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMuNSIvPgo8L3N2Zz4=">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBkMGQwZCIvPgogIDxyZWN0IHg9IjExIiB5PSIxMSIgd2lkdGg9Ijc4IiBoZWlnaHQ9Ijc4IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8bGluZSB4MT0iNjUiIHkxPSIxMSIgeDI9IjY1IiB5Mj0iNjMiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxsaW5lIHgxPSIxMSIgeTE9IjM3IiB4Mj0iNjUiIHkyPSIzNyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPGxpbmUgeDE9IjExIiB5MT0iNjMiIHgyPSI2NSIgeTI9IjYzIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiLz4KPC9zdmc+">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
@@ -240,6 +240,14 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .drive-badge{display:flex;align-items:center;gap:8px;background:var(--dark2);border:1px solid var(--border-light);border-radius:4px;padding:10px 14px;font-size:12px;color:var(--light)}
 .drive-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--mid);flex-shrink:0}
 .drive-badge .dot.connected{background:#7db87d}
+
+.poc-toggle-btn{background:none;border:1px solid var(--border-light);color:var(--mid);font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;border-radius:3px;cursor:pointer;transition:all .2s}
+.poc-toggle-btn:hover{border-color:var(--white);color:var(--white)}
+.poc-toggle-btn.active{background:var(--red);border-color:var(--red);color:var(--white)}
+.contact-dropdown-item{padding:8px 12px;cursor:pointer;font-size:13px;color:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.contact-dropdown-item:hover{background:var(--dark3)}
+.contact-dropdown-item:last-child{border-bottom:none}
+.cdi-sub{font-size:11px;color:var(--mid)}
 
 @media(max-width:700px){
   .detail-body{grid-template-columns:1fr}
@@ -594,13 +602,37 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
       </div>
       <div class="form-group"><label>Location / City</label><input id="ag-location" placeholder="London, UK"/></div>
       <div class="form-group"><label>Website</label><input id="ag-web" placeholder="https://"/></div>
-      <div class="form-group"><label>General Email</label><input id="ag-email" type="email" placeholder="info@company.com"/></div>
-      <div class="form-group"><label>Phone</label><input id="ag-phone" placeholder="+44 20 0000 0000"/></div>
+      <div class="form-group" style="grid-column:1/-1"><label>General Email</label><input id="ag-email" type="email" placeholder="info@company.com"/></div>
       <div class="form-divider">Point of Contact</div>
-      <div class="form-group"><label>Contact Name</label><input id="ag-contact-name" placeholder="Jane Smith"/></div>
-      <div class="form-group"><label>Contact Role</label><input id="ag-contact-role" placeholder="Head of Production"/></div>
-      <div class="form-group"><label>Contact Email</label><input id="ag-contact-email" type="email" placeholder="jane@company.com"/></div>
-      <div class="form-group"><label>Contact Phone</label><input id="ag-contact-phone" placeholder="+44 7700 000000"/></div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>Contact Source</label>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button type="button" class="poc-toggle-btn active" id="poc-manual-btn" onclick="setPocMode('manual')">Enter manually</button>
+          <button type="button" class="poc-toggle-btn" id="poc-link-btn" onclick="setPocMode('link')">Link from Contacts</button>
+        </div>
+      </div>
+      <!-- Manual entry -->
+      <div id="poc-manual" style="display:contents">
+        <div class="form-group"><label>Contact Name</label><input id="ag-contact-name" placeholder="Jane Smith"/></div>
+        <div class="form-group"><label>Contact Role</label><input id="ag-contact-role" placeholder="Head of Production"/></div>
+        <div class="form-group" style="grid-column:1/-1"><label>Contact Email</label><input id="ag-contact-email" type="email" placeholder="jane@company.com"/></div>
+      </div>
+      <!-- Link from contacts -->
+      <div id="poc-link" style="display:none;grid-column:1/-1">
+        <div class="form-group">
+          <label>Search your contacts</label>
+          <input id="ag-contact-search" placeholder="Type a name…" oninput="filterContactDropdown()" autocomplete="off"/>
+          <div id="ag-contact-dropdown" style="display:none;background:var(--dark2);border:1px solid var(--border-light);border-radius:3px;max-height:180px;overflow-y:auto;margin-top:4px"></div>
+        </div>
+        <div id="poc-linked-preview" style="display:none;background:var(--dark2);border:1px solid var(--border-light);border-radius:4px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--white)" id="poc-preview-name"></div>
+            <div style="font-size:11px;color:var(--mid)" id="poc-preview-detail"></div>
+          </div>
+          <button type="button" onclick="clearLinkedContact()" style="background:none;border:none;color:var(--mid);cursor:pointer;font-size:16px;padding:0" title="Remove">✕</button>
+        </div>
+        <input type="hidden" id="ag-linked-contact-id"/>
+      </div>
       <div class="form-divider">Services & Tags</div>
       <div class="form-group" style="grid-column:1/-1">
         <label>Services I Can Provide — press Enter or + to add each one</label>
@@ -1363,14 +1395,13 @@ function openAgencyDrawer(id){
       <div><span class="ds-label">Phone</span><div class="ds-value">${a.phone?`<a href="tel:${esc(a.phone)}">${esc(a.phone)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
     </div>
     ${a.web?`<div class="drawer-section"><span class="ds-label">Website</span><div class="ds-value"><a href="${esc(a.web)}" target="_blank" rel="noopener">${esc(a.web)}</a></div></div>`:''}
-    ${(a.contactName||a.contactRole||a.contactEmail||a.contactPhone)?`
+    ${(a.contactName||a.contactRole||a.contactEmail)?`
     <div class="drawer-section" style="background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:12px">
-      <span class="ds-label">Point of Contact</span>
+      <span class="ds-label">Point of Contact${a.linkedContactId?' <span style="color:var(--gold);font-size:9px;letter-spacing:.1em">LINKED</span>':''}</span>
       <div class="ds-value" style="font-weight:700;margin-top:4px">${esc(a.contactName||'—')}</div>
       ${a.contactRole?`<div class="ct-company">${esc(a.contactRole)}</div>`:''}
       <div style="display:flex;gap:1rem;margin-top:6px;flex-wrap:wrap">
         ${a.contactEmail?`<a href="mailto:${esc(a.contactEmail)}" style="color:var(--gold);font-size:12px;text-decoration:none">${esc(a.contactEmail)}</a>`:''}
-        ${a.contactPhone?`<a href="tel:${esc(a.contactPhone)}" style="color:var(--gold);font-size:12px;text-decoration:none">${esc(a.contactPhone)}</a>`:''}
       </div>
     </div>`:''}
     <div class="drawer-section"><span class="ds-label">Services I Can Provide</span>
@@ -1424,13 +1455,63 @@ function renderAgTagPills(){
   document.getElementById('ag-tag-pills').innerHTML=currentAgTags.map(t=>`<span class="tag-pill">${esc(t)}<button onclick="removeAgTag('${esc(t)}')" title="Remove">×</button></span>`).join('');
 }
 
+// ─── POC MODE ─────────────────────────────────────────────────────────────────
+let pocMode = 'manual';
+
+function setPocMode(mode){
+  pocMode = mode;
+  document.getElementById('poc-manual-btn').classList.toggle('active', mode==='manual');
+  document.getElementById('poc-link-btn').classList.toggle('active', mode==='link');
+  document.getElementById('poc-manual').style.display = mode==='manual'?'contents':'none';
+  document.getElementById('poc-link').style.display = mode==='link'?'block':'none';
+  if(mode==='manual') clearLinkedContact();
+}
+
+function filterContactDropdown(){
+  const q = document.getElementById('ag-contact-search').value.toLowerCase().trim();
+  const dd = document.getElementById('ag-contact-dropdown');
+  if(!q){ dd.style.display='none'; return; }
+  const matches = contacts.filter(c=>{
+    const hay = [c.first,c.last,c.company,c.title].filter(Boolean).join(' ').toLowerCase();
+    return hay.includes(q);
+  }).slice(0,8);
+  if(!matches.length){ dd.style.display='none'; return; }
+  dd.style.display='block';
+  dd.innerHTML = matches.map(c=>`
+    <div class="contact-dropdown-item" onclick="selectLinkedContact('${c.id}')">
+      <div>
+        <div>${esc(c.first)} ${esc(c.last)}</div>
+        <div class="cdi-sub">${esc([c.title,c.company].filter(Boolean).join(' · ')||'')}</div>
+      </div>
+    </div>`).join('');
+}
+
+function selectLinkedContact(id){
+  const c = contacts.find(x=>x.id===id); if(!c) return;
+  document.getElementById('ag-linked-contact-id').value = id;
+  document.getElementById('ag-contact-search').value = '';
+  document.getElementById('ag-contact-dropdown').style.display = 'none';
+  const preview = document.getElementById('poc-linked-preview');
+  document.getElementById('poc-preview-name').textContent = (c.first||'')+' '+(c.last||'');
+  document.getElementById('poc-preview-detail').textContent = [c.title,c.company,c.email].filter(Boolean).join(' · ');
+  preview.style.display = 'flex';
+}
+
+function clearLinkedContact(){
+  document.getElementById('ag-linked-contact-id').value = '';
+  document.getElementById('ag-contact-search').value = '';
+  document.getElementById('ag-contact-dropdown').style.display = 'none';
+  document.getElementById('poc-linked-preview').style.display = 'none';
+}
+
 function clearAgencyForm(){
-  ['ag-name','ag-location','ag-web','ag-email','ag-phone','ag-contact-name','ag-contact-role','ag-contact-email','ag-contact-phone','ag-history','ag-notes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  ['ag-name','ag-location','ag-web','ag-email','ag-contact-name','ag-contact-role','ag-contact-email','ag-history','ag-notes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
   document.getElementById('ag-type').value='Production Company';
   document.getElementById('ag-service-input').value='';
   document.getElementById('ag-tag-input').value='';
   currentAgServices=[]; currentAgTags=[];
   renderAgServicePills(); renderAgTagPills();
+  setPocMode('manual');
 }
 
 function openAddAgencyModal(){
@@ -1449,20 +1530,24 @@ function openEditAgencyModal(id){
   document.getElementById('ag-location').value=a.location||'';
   document.getElementById('ag-web').value=a.web||'';
   document.getElementById('ag-email').value=a.email||'';
-  document.getElementById('ag-phone').value=a.phone||'';
-  document.getElementById('ag-contact-name').value=a.contactName||'';
-  document.getElementById('ag-contact-role').value=a.contactRole||'';
-  document.getElementById('ag-contact-email').value=a.contactEmail||'';
-  document.getElementById('ag-contact-phone').value=a.contactPhone||'';
   document.getElementById('ag-history').value=a.history||'';
   document.getElementById('ag-notes').value=a.notes||'';
   currentAgServices=[...(a.services||[])]; currentAgTags=[...(a.tags||[])];
   renderAgServicePills(); renderAgTagPills();
+  // restore POC mode
+  if(a.linkedContactId){
+    setPocMode('link');
+    selectLinkedContact(a.linkedContactId);
+  } else {
+    setPocMode('manual');
+    document.getElementById('ag-contact-name').value=a.contactName||'';
+    document.getElementById('ag-contact-role').value=a.contactRole||'';
+    document.getElementById('ag-contact-email').value=a.contactEmail||'';
+  }
   document.getElementById('agency-modal').classList.add('open');
 }
 
 function saveAgency(){
-  // flush any pending input
   const ps=document.getElementById('ag-service-input').value.trim();
   if(ps&&!currentAgServices.includes(ps)){ currentAgServices.push(ps); document.getElementById('ag-service-input').value=''; }
   const pt=document.getElementById('ag-tag-input').value.trim();
@@ -1470,16 +1555,26 @@ function saveAgency(){
 
   const name=document.getElementById('ag-name').value.trim();
   if(!name){ alert('Organisation name is required'); return; }
+
+  // Resolve point of contact
+  let contactName='', contactRole='', contactEmail='', linkedContactId='';
+  if(pocMode==='link'){
+    linkedContactId = document.getElementById('ag-linked-contact-id').value;
+    const linked = contacts.find(x=>x.id===linkedContactId);
+    if(linked){ contactName=(linked.first||'')+' '+(linked.last||''); contactRole=linked.title||''; contactEmail=linked.email||''; }
+  } else {
+    contactName=document.getElementById('ag-contact-name').value.trim();
+    contactRole=document.getElementById('ag-contact-role').value.trim();
+    contactEmail=document.getElementById('ag-contact-email').value.trim();
+  }
+
   const data={
     name, type:document.getElementById('ag-type').value,
     location:document.getElementById('ag-location').value.trim(),
     web:document.getElementById('ag-web').value.trim(),
     email:document.getElementById('ag-email').value.trim(),
-    phone:document.getElementById('ag-phone').value.trim(),
-    contactName:document.getElementById('ag-contact-name').value.trim(),
-    contactRole:document.getElementById('ag-contact-role').value.trim(),
-    contactEmail:document.getElementById('ag-contact-email').value.trim(),
-    contactPhone:document.getElementById('ag-contact-phone').value.trim(),
+    contactName, contactRole, contactEmail,
+    linkedContactId: linkedContactId||null,
     history:document.getElementById('ag-history').value.trim(),
     notes:document.getElementById('ag-notes').value.trim(),
     services:[...currentAgServices], tags:[...currentAgTags]
@@ -1497,6 +1592,12 @@ function saveAgency(){
 }
 
 document.getElementById('agency-modal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeModal('agency-modal'); });
+
+// Close contact dropdown when clicking outside
+document.addEventListener('click',e=>{
+  const dd=document.getElementById('ag-contact-dropdown');
+  if(dd && !dd.contains(e.target) && e.target.id!=='ag-contact-search') dd.style.display='none';
+});
 </script>
 </body>
 </html>
