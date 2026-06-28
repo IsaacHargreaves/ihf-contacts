@@ -76,7 +76,32 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .sort-select{width:100%;background:var(--dark2);border:1px solid var(--border-light);color:var(--white);font-family:var(--font);font-size:12px;padding:6px 8px;border-radius:3px;outline:none;cursor:pointer}
 .sort-select option{background:var(--dark2)}
 
-/* CONTACT LIST */
+/* CONTACT TABLE */
+.contact-table-wrap{flex:1;overflow-y:auto}
+.contact-table{width:100%;border-collapse:collapse}
+.contact-table thead tr{border-bottom:2px solid var(--border-light)}
+.contact-table th{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--light);padding:10px 16px;text-align:left;white-space:nowrap;cursor:pointer;user-select:none;background:var(--dark1);position:sticky;top:0;z-index:1}
+.contact-table th:hover{color:var(--white)}
+.contact-table th.sorted{color:var(--white)}
+.contact-table th .sort-arrow{margin-left:4px;opacity:.5;font-size:9px}
+.contact-table th.sorted .sort-arrow{opacity:1;color:var(--red)}
+.contact-table tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s}
+.contact-table tbody tr:hover{background:var(--dark2)}
+.contact-table tbody tr.selected{background:var(--dark3)}
+.contact-table td{padding:11px 16px;font-size:13px;color:var(--white);vertical-align:middle}
+.ct-avatar{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--white);flex-shrink:0;vertical-align:middle;margin-right:8px}
+.ct-name{font-weight:700;display:flex;align-items:center;gap:4px}
+.ct-star{color:var(--gold);font-size:13px}
+.ct-company{font-size:12px;color:var(--mid)}
+.ct-tags{display:flex;flex-wrap:wrap;gap:4px}
+.ct-tag{font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 7px;border-radius:2px;background:var(--dark3);color:var(--off-white);white-space:nowrap}
+.ct-imp{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap}
+.imp-high{background:#2a0a05;color:#e05040}
+.imp-med{background:#2a1f05;color:#c8a96e}
+.imp-low{background:#1a1a1a;color:#888}
+.empty-table{padding:3rem;text-align:center;color:var(--mid);font-size:13px;letter-spacing:0.05em}
+
+/* CONTACT LIST (sidebar) */
 .contact-list{display:flex;flex-direction:column}
 .contact-item{padding:10px 1rem;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .15s}
 .contact-item:hover{background:var(--dark2)}
@@ -88,7 +113,30 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .contact-item .ci-star{color:var(--gold);font-size:14px}
 .empty-list{padding:2rem 1rem;text-align:center;color:var(--mid);font-size:12px;letter-spacing:0.05em}
 
-/* DETAIL */
+/* DETAIL DRAWER */
+.drawer-overlay{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.5)}
+.drawer-overlay.open{display:block}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:min(520px,95vw);background:var(--dark1);border-left:1px solid var(--border-light);z-index:401;overflow-y:auto;transform:translateX(100%);transition:transform .25s ease}
+.drawer-overlay.open .drawer{transform:translateX(0)}
+.drawer-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;background:var(--dark1);z-index:1}
+.drawer-avatar-area{display:flex;align-items:center;gap:1rem}
+.drawer-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--white);flex-shrink:0}
+.drawer-name{font-size:19px;font-weight:700;color:var(--white)}
+.drawer-company{font-size:12px;color:var(--mid);margin-top:2px}
+.drawer-actions{display:flex;gap:6px;flex-shrink:0}
+.drawer-close{background:none;border:1px solid var(--border-light);color:var(--mid);width:30px;height:30px;border-radius:3px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.drawer-close:hover{border-color:var(--white);color:var(--white)}
+.drawer-body{padding:1.5rem;display:flex;flex-direction:column;gap:1.2rem}
+.drawer-section{display:flex;flex-direction:column;gap:6px}
+.drawer-section.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ds-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--light);display:block}
+.ds-value{font-size:13px;color:var(--white)}
+.ds-value a{color:var(--gold);text-decoration:none}
+.ds-value a:hover{text-decoration:underline}
+.ds-muted{color:var(--mid)}
+.notes-box{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:12px;font-size:13px;color:var(--off-white);line-height:1.6;white-space:pre-wrap}
+
+/* DETAIL (keep for compatibility) */
 .detail-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1rem;color:var(--mid)}
 .detail-placeholder svg{opacity:.3;width:48px;height:48px}
 .detail-placeholder p{font-size:12px;letter-spacing:0.1em;text-transform:uppercase}
@@ -108,16 +156,11 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
 .detail-body{padding:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
 .detail-section{display:flex;flex-direction:column;gap:6px}
 .detail-section.full{grid-column:1/-1}
-.ds-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--light);display:block}
-.ds-value{font-size:14px;color:var(--white)}
-.ds-value a{color:var(--gold);text-decoration:none}
-.ds-value a:hover{text-decoration:underline}
 .tags-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
 .tag{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--dark3);color:var(--off-white)}
 .tag-high{background:#2a0a05;color:#e05040}
 .tag-med{background:#2a1f05;color:#c8a96e}
 .tag-low{background:#1a1a1a;color:#888}
-.notes-box{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:12px;font-size:13px;color:var(--off-white);line-height:1.6;min-height:60px;white-space:pre-wrap}
 
 /* TOOLBAR */
 .toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
@@ -281,22 +324,49 @@ nav button.active{color:var(--white);border-bottom-color:var(--red)}
           <div class="filter-chip" id="fav-toggle" onclick="toggleFavFilter(this)"><span class="dot" style="background:var(--gold)"></span>Favourites only</div>
         </div>
       </div>
-      <div style="flex:1"><div id="contact-list" class="contact-list"></div></div>
     </div>
-    <div class="content">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <h2>Contacts</h2>
-          <span class="count" id="count-label"></span>
-        </div>
+    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+      <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--dark1)">
+        <span class="count" id="count-label" style="font-size:12px;color:var(--mid)"></span>
         <button class="btn-add" onclick="openAddModal()">+ New Contact</button>
       </div>
-      <div id="contact-detail">
-        <div class="detail-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <p>Select a contact</p>
+      <div class="contact-table-wrap">
+        <table class="contact-table">
+          <thead>
+            <tr>
+              <th style="width:36px;padding-right:0"></th>
+              <th onclick="setSortCol('name')">Name <span class="sort-arrow" id="arr-name">↕</span></th>
+              <th onclick="setSortCol('company')">Company <span class="sort-arrow" id="arr-company">↕</span></th>
+              <th onclick="setSortCol('tags')">Role Tags <span class="sort-arrow" id="arr-tags">↕</span></th>
+              <th onclick="setSortCol('importance')">Importance <span class="sort-arrow" id="arr-importance">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="contact-tbody"></tbody>
+        </table>
+        <div id="table-empty" class="empty-table" style="display:none">No contacts found</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT DETAIL DRAWER -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer(event)">
+    <div class="drawer" id="contact-drawer">
+      <div class="drawer-header">
+        <div class="drawer-avatar-area">
+          <div class="drawer-avatar" id="d-avatar"></div>
+          <div>
+            <div class="drawer-name" id="d-name"></div>
+            <div class="drawer-company" id="d-company"></div>
+          </div>
+        </div>
+        <div class="drawer-actions">
+          <button class="btn-icon" id="d-fav-btn" onclick="toggleFavDrawer()" title="Favourite">★</button>
+          <button class="btn-edit" onclick="openEditModalFromDrawer()">Edit</button>
+          <button class="btn-icon danger" onclick="deleteFromDrawer()" title="Delete">✕</button>
+          <button class="drawer-close" onclick="closeDrawer()">✕</button>
         </div>
       </div>
+      <div class="drawer-body" id="d-body"></div>
     </div>
   </div>
 
@@ -705,9 +775,20 @@ function toggleFavFilter(el){
 }
 
 // ─── CONTACT LIST ─────────────────────────────────────────────────────────────
+// ─── CONTACT TABLE ────────────────────────────────────────────────────────────
+let sortCol='name', sortDir=1;
+
+function setSortCol(col){
+  if(sortCol===col) sortDir*=-1; else { sortCol=col; sortDir=1; }
+  document.querySelectorAll('.contact-table th').forEach(th=>th.classList.remove('sorted'));
+  document.querySelectorAll('.sort-arrow').forEach(el=>el.textContent='↕');
+  const th=document.querySelector(`[onclick="setSortCol('${col}')"]`);
+  if(th){ th.classList.add('sorted'); th.querySelector('.sort-arrow').textContent=sortDir===1?'↑':'↓'; }
+  renderList();
+}
+
 function getFiltered(){
   const q=document.getElementById('search-input').value.toLowerCase();
-  const sort=document.getElementById('sort-select').value;
   let list=contacts.filter(c=>{
     if(showFavOnly&&!c.favourite) return false;
     if(impFilter!=='all'&&c.importance!==impFilter) return false;
@@ -719,78 +800,100 @@ function getFiltered(){
     return true;
   });
   const io={High:0,Medium:1,Low:2};
-  if(sort==='name') list.sort((a,b)=>((a.first||'')+(a.last||'')).localeCompare((b.first||'')+(b.last||'')));
-  else if(sort==='name-desc') list.sort((a,b)=>((b.first||'')+(b.last||'')).localeCompare((a.first||'')+(a.last||'')));
-  else if(sort==='importance') list.sort((a,b)=>(io[a.importance]??2)-(io[b.importance]??2));
-  else if(sort==='recent') list.sort((a,b)=>(b.added||0)-(a.added||0));
-  else if(sort==='fav') list.sort((a,b)=>(b.favourite?1:0)-(a.favourite?1:0));
+  list.sort((a,b)=>{
+    if(sortCol==='name') return ((a.first||'')+(a.last||'')).localeCompare((b.first||'')+(b.last||''))*sortDir;
+    if(sortCol==='company') return (a.company||'').localeCompare(b.company||'')*sortDir;
+    if(sortCol==='importance') return ((io[a.importance]??2)-(io[b.importance]??2))*sortDir;
+    if(sortCol==='tags') return (a.tags||[]).join(' ').localeCompare((b.tags||[]).join(' '))*sortDir;
+    return 0;
+  });
+  if(showFavOnly || document.getElementById('sort-select').value==='fav')
+    list.sort((a,b)=>(b.favourite?1:0)-(a.favourite?1:0));
   return list;
 }
+
+function impBadge(v){
+  if(v==='High') return `<span class="ct-imp imp-high">High</span>`;
+  if(v==='Low') return `<span class="ct-imp imp-low">Low</span>`;
+  return `<span class="ct-imp imp-med">Medium</span>`;
+}
+
 function renderList(){
   const list=getFiltered();
-  const el=document.getElementById('contact-list');
+  const tbody=document.getElementById('contact-tbody');
+  const empty=document.getElementById('table-empty');
   document.getElementById('count-label').textContent=list.length+' contact'+(list.length!==1?'s':'');
-  if(!list.length){ el.innerHTML='<div class="empty-list">No contacts found</div>'; return; }
-  el.innerHTML=list.map(c=>`
-    <div class="contact-item${selectedId===c.id?' selected':''}" onclick="selectContact('${c.id}')">
-      <div class="avatar" style="background:${avatarColor(c.id)}">${initials(c)}</div>
-      <div class="ci-info">
-        <div class="ci-name">${esc(c.first)} ${esc(c.last)}</div>
-        <div class="ci-role">${esc(c.company||c.title||'—')}</div>
-      </div>
-      ${c.favourite?'<span class="ci-star">★</span>':''}
-    </div>`).join('');
+  if(!list.length){ tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  tbody.innerHTML=list.map(c=>`
+    <tr class="${selectedId===c.id?'selected':''}" onclick="openDrawer('${c.id}')">
+      <td style="padding-right:0;padding-left:14px"><div class="ct-avatar" style="background:${avatarColor(c.id)}">${initials(c)}</div></td>
+      <td><div class="ct-name">${esc(c.first)} ${esc(c.last)}${c.favourite?' <span class="ct-star">★</span>':''}</div>${c.title?`<div class="ct-company">${esc(c.title)}</div>`:''}</td>
+      <td><div class="ct-company">${esc(c.company||'—')}</div></td>
+      <td><div class="ct-tags">${(c.tags||[]).map(t=>`<span class="ct-tag">${esc(t)}</span>`).join('')||'<span style="color:var(--mid);font-size:12px">—</span>'}</div></td>
+      <td>${impBadge(c.importance)}</td>
+    </tr>`).join('');
 }
 
-function impClass(v){ return v==='High'?'tag-high':v==='Medium'?'tag-med':'tag-low'; }
-
-function selectContact(id){
+// ─── DRAWER ───────────────────────────────────────────────────────────────────
+function openDrawer(id){
   selectedId=id; renderList();
   const c=contacts.find(x=>x.id===id); if(!c) return;
-  document.getElementById('contact-detail').innerHTML=`
-    <div class="contact-detail">
-      <div class="detail-header">
-        <div class="detail-avatar-area">
-          <div class="detail-avatar" style="background:${avatarColor(c.id)}">${initials(c)}</div>
-          <div>
-            <div class="detail-name">${esc(c.first)} ${esc(c.last)}</div>
-            <div class="detail-company">${esc([c.title,c.company].filter(Boolean).join(' · ')||'—')}</div>
-          </div>
-        </div>
-        <div class="detail-actions">
-          <button class="btn-icon${c.favourite?' starred':''}" onclick="toggleFav('${c.id}')" title="${c.favourite?'Remove favourite':'Add favourite'}">★</button>
-          <button class="btn-edit" onclick="openEditModal('${c.id}')">Edit</button>
-          <button class="btn-icon danger" onclick="deleteContact('${c.id}')" title="Delete">✕</button>
-        </div>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><span class="ds-label">Email</span><div class="ds-value">${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:'—'}</div></div>
-        <div class="detail-section"><span class="ds-label">Phone</span><div class="ds-value">${c.phone?`<a href="tel:${esc(c.phone)}">${esc(c.phone)}</a>`:'—'}</div></div>
-        <div class="detail-section"><span class="ds-label">Website / LinkedIn</span><div class="ds-value">${c.web?`<a href="${esc(c.web)}" target="_blank" rel="noopener">${esc(c.web)}</a>`:'—'}</div></div>
-        <div class="detail-section"><span class="ds-label">Location</span><div class="ds-value">${esc(c.location||'—')}</div></div>
-        <div class="detail-section"><span class="ds-label">Source</span><div class="ds-value">${esc(c.source||'—')}</div></div>
-        <div class="detail-section"><span class="ds-label">Importance</span><div class="ds-value"><span class="tag ${impClass(c.importance)}">${esc(c.importance||'—')}</span></div></div>
-        <div class="detail-section full"><span class="ds-label">Role Tags</span>
-          <div class="tags-row">${(c.tags||[]).length?c.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join(''):'<span style="color:var(--mid);font-size:13px">None</span>'}</div>
-        </div>
-        ${c.nextaction?`<div class="detail-section full"><span class="ds-label">Next Action</span><div class="ds-value">${esc(c.nextaction)}</div></div>`:''}
-        ${c.notes?`<div class="detail-section full"><span class="ds-label">Notes</span><div class="notes-box">${esc(c.notes)}</div></div>`:''}
-      </div>
-    </div>`;
+  const av=document.getElementById('d-avatar');
+  av.textContent=initials(c); av.style.background=avatarColor(c.id);
+  document.getElementById('d-name').textContent=(c.first||'')+' '+(c.last||'');
+  document.getElementById('d-company').textContent=[c.title,c.company].filter(Boolean).join(' · ')||'';
+  const favBtn=document.getElementById('d-fav-btn');
+  favBtn.classList.toggle('starred',!!c.favourite);
+  favBtn.title=c.favourite?'Remove favourite':'Add favourite';
+  document.getElementById('d-body').innerHTML=`
+    <div class="drawer-section row">
+      <div><span class="ds-label">Email</span><div class="ds-value">${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
+      <div><span class="ds-label">Phone</span><div class="ds-value">${c.phone?`<a href="tel:${esc(c.phone)}">${esc(c.phone)}</a>`:'<span class="ds-muted">—</span>'}</div></div>
+    </div>
+    <div class="drawer-section row">
+      <div><span class="ds-label">Location</span><div class="ds-value">${esc(c.location||'—')}</div></div>
+      <div><span class="ds-label">Source</span><div class="ds-value">${esc(c.source||'—')}</div></div>
+    </div>
+    ${c.web?`<div class="drawer-section"><span class="ds-label">Website / LinkedIn</span><div class="ds-value"><a href="${esc(c.web)}" target="_blank" rel="noopener">${esc(c.web)}</a></div></div>`:''}
+    <div class="drawer-section row">
+      <div><span class="ds-label">Importance</span><div class="ds-value">${impBadge(c.importance)}</div></div>
+    </div>
+    <div class="drawer-section"><span class="ds-label">Role Tags</span>
+      <div class="ct-tags" style="margin-top:4px">${(c.tags||[]).length?c.tags.map(t=>`<span class="ct-tag">${esc(t)}</span>`).join(''):'<span class="ds-muted">None</span>'}</div>
+    </div>
+    ${c.nextaction?`<div class="drawer-section"><span class="ds-label">Next Action</span><div class="ds-value">${esc(c.nextaction)}</div></div>`:''}
+    ${c.notes?`<div class="drawer-section"><span class="ds-label">Notes</span><div class="notes-box">${esc(c.notes)}</div></div>`:''}
+  `;
+  document.getElementById('drawer-overlay').classList.add('open');
 }
 
-function toggleFav(id){
-  const c=contacts.find(x=>x.id===id);
-  if(c){ c.favourite=!c.favourite; scheduleSave(); renderList(); selectContact(id); }
+function closeDrawer(e){
+  if(e && e.target!==document.getElementById('drawer-overlay')) return;
+  document.getElementById('drawer-overlay').classList.remove('open');
+  selectedId=null; renderList();
 }
-function deleteContact(id){
+
+function toggleFavDrawer(){
+  const c=contacts.find(x=>x.id===selectedId); if(!c) return;
+  c.favourite=!c.favourite; scheduleSave(); openDrawer(selectedId);
+}
+
+function openEditModalFromDrawer(){ openEditModal(selectedId); }
+
+function deleteFromDrawer(){
   if(!confirm('Delete this contact?')) return;
-  contacts=contacts.filter(x=>x.id!==id);
-  scheduleSave(); selectedId=null; renderList();
-  document.getElementById('contact-detail').innerHTML='<div class="detail-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a contact</p></div>';
+  contacts=contacts.filter(x=>x.id!==selectedId);
+  scheduleSave(); selectedId=null;
+  document.getElementById('drawer-overlay').classList.remove('open');
+  renderList();
 }
 
-// ─── TAG INPUT ────────────────────────────────────────────────────────────────
+function selectContact(id){ openDrawer(id); }
+function toggleFav(id){ const c=contacts.find(x=>x.id===id); if(c){ c.favourite=!c.favourite; scheduleSave(); if(selectedId===id) openDrawer(id); else renderList(); } }
+function deleteContact(id){ selectedId=id; deleteFromDrawer(); }
+
+
 function handleTagKey(e){ if(e.key==='Enter'){ e.preventDefault(); addTag(); } }
 function addTag(){
   const inp=document.getElementById('f-tag-input');
@@ -859,7 +962,7 @@ function saveContact(){
     contacts.push(data); selectedId=data.id;
   }
   scheduleSave(); closeModal('contact-modal'); renderList();
-  selectContact(editingId||selectedId);
+  openDrawer(editingId||selectedId);
 }
 
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
